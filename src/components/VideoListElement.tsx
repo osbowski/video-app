@@ -1,12 +1,19 @@
+import { Video } from "../types";
 import VideoActions from "./VideoActions"
 import VideoData from "./VideoData"
 
-const VideoListElement:React.FC = ()=>{
+interface VideoListElementProps{
+    data:Video;
+}
+
+const VideoListElement:React.FC<VideoListElementProps> = ({data})=>{
+    const {link, title} = data;
+
     return(
         <div className="video-list-element">
-            <VideoData />
-            <h3>Video Title</h3>
-            <div>Video</div>
+            <VideoData data={data}/>
+            <h3>{title}</h3>
+            <div>{link}</div>
             <VideoActions />
             
         </div>

@@ -1,9 +1,16 @@
-const VideoData:React.FC = ()=>{
+import { Video } from "../types";
+
+interface VideoDataProps{
+    data:Video;
+}
+
+const VideoData:React.FC<VideoDataProps> = ({data})=>{
+    const {likes, views, date} = data;
     return(
         <div className="video-data-container">
-            <p>Odtworzenia: 100</p>
-            <p>Polubienia: 30</p>
-            <p>Data dodania: 01.07.2021</p>
+            <p>Odtworzenia: {views}</p>
+            <p>Polubienia: {likes}</p>
+            <p>Data dodania: {date}</p>
         </div>
     )
 }
