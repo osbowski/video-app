@@ -1,9 +1,14 @@
 import './App.css';
+import AddVideo from './components/AddVideo';
+import Nav from './components/Nav';
+import VideoList from './components/VideoList';
 
-function App() {
+const App=()=>{
   return (
     <div className="App">
-      Hello World
+      <Nav />
+      <VideoList />
+      <AddVideo />
     </div>
   );
 }
