@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import fetchYtApi from "../fetch-yt-api";
 
 const AddVideo:React.FC = ()=>{
     const [link,setLink] = useState('');
+    
+    
 
-    const onSubmit =(e:React.FormEvent)=>{
+    const onSubmit = async(e:React.FormEvent)=>{
         e.preventDefault();
-        console.log(link);
+        const data = await fetchYtApi(link)
+        console.log('Log from submit',data)
     }
 
     return(
