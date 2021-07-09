@@ -3,25 +3,31 @@ import getVideoId from "get-video-id";
 import fetchYtApi from "../fetch-yt-api";
 import isURL from 'validator/lib/isURL';
 
+interface videoIdInterface{
+    id:string;
+    service:string| null;
+}
+
+
 const AddVideo:React.FC = ()=>{
-    const [videoID,setVideoID] = useState('');
+    const [videoInfo,setVideoInfo] = useState<videoIdInterface>({id:'',service:null});
     
     
 
     const onSubmit = async(e:React.FormEvent)=>{
         e.preventDefault();
-        const data = await fetchYtApi(videoID)
-        console.log('Log from submit',data)
+        const data = await fetchYtApi(videoInfo)
+        console.log('ASYNC DATA:', data);
     }
 
     const checkVideoID =(value:string)=>{
         const checkIfURL = isURL(value);
         if(checkIfURL){
             const {id, service} = getVideoId(value)
-            console.log(service)
-            setVideoID(id!)
+            setVideoInfo({id:id!,service:service})
+            
         }else{
-            setVideoID(value)
+            setVideoInfo({id:value, service:null})
         }
     }
 
