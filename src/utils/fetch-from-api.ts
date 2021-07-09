@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { fetchedVideo } from '../types';
 
 const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
+
+    let fetchedVideo:fetchedVideo;
     const {id, service} = videoId;
 
     if(service==='youtube'){
@@ -9,8 +12,8 @@ const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
         &fields=items(id,snippet(title,publishedAt),statistics(viewCount,likeCount))&part=snippet,statistics`;
         try{
             const response = await axios.get(endpoint);
-            const fetchedMovieData = await response.data.items[0]
-            return fetchedMovieData;
+            const data = await response.data.items[0]
+            console.log(data);
         }catch(error){
             console.log('ERROR:',error)
         }

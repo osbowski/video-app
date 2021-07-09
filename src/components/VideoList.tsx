@@ -10,7 +10,7 @@ const VideoList:React.FC = ()=>{
         <div className="video-list">
             <h1>Twoje filmy</h1>
             {videos.map(video=>(
-                <VideoListElement key={video.id} data={video} />
+                <VideoListElement key={video.id} video={video} />
             ))}
         </div>
     )

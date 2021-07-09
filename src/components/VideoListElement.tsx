@@ -1,18 +1,18 @@
-import { Video } from "../types";
+import { fetchedVideo } from "../types";
 import VideoActions from "./VideoActions"
 import VideoData from "./VideoData"
 
 interface VideoListElementProps{
-    data:Video;
+    video:fetchedVideo;
 }
 
-const VideoListElement:React.FC<VideoListElementProps> = ({data})=>{
-    const {link, title} = data;
-
+const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
+    const {link, title} = video.data;
     return(
         <div className="video-list-element">
-            <VideoData data={data}/>
+            <VideoData data={video.data}/>
             <h3>{title}</h3>
+            <p>{video.service}</p>
             <div>{link}</div>
             <VideoActions />
             

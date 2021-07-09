@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import getVideoId from "get-video-id";
-import fetchYtApi from "../fetch-yt-api";
+import fetchYtApi from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
 
 interface videoIdInterface{
