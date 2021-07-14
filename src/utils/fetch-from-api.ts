@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { fetchedVideo } from '../types';
 
-const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
+const fetchDataFromApi= async (videoId:{id:string, service:string|null})=>{
 
     let fetchedVideo:fetchedVideo;
     const {id, service} = videoId;
@@ -12,8 +12,20 @@ const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
         &fields=items(id,snippet(title,publishedAt),statistics(viewCount,likeCount))&part=snippet,statistics`;
         try{
             const response = await axios.get(endpoint);
-            const data = await response.data.items[0]
-            console.log(data);
+            const data = await response.data.items[0];
+            fetchedVideo={
+                id,
+                service,
+                data:{
+                    title:data.snippet.title,
+                    views:data.statistics.viewCount,
+                    likes:data.statistics.likeCount,
+                    publishedAt:data.snippet.publishedAt,
+                    link:`https://www.youtube.com/watch?v=${id}`
+                }
+            }
+
+            return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
         }
@@ -27,14 +39,26 @@ const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
                     Authorization: `Bearer ${process.env.REACT_APP_VIMEO_TOKEN}`,
                 }
             });
-            const fetchedMovieData =await response.data;
-            return fetchedMovieData;
+            const data =await response.data;
+            fetchedVideo={
+                id,
+                service,
+                data:{
+                    title:data.name,
+                    views:data.stats.plays,
+                    likes:data.metadata.connections.likes.total,
+                    publishedAt:data.created_time,
+                    link:`https://www.youtube.com/watch?v=${id}`
+                }
+            }
+
+            return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
         }
     }else{
-       return 'WRONG URL'
+       return null;
     }
 }
 
-export default fetchYtApi
+export default fetchDataFromApi;
