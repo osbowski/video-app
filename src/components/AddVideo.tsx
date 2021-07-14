@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import getVideoId from "get-video-id";
-import fetchDataFromApi from "../utils/fetch-from-api";
+import fetchYtApi from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
+<<<<<<< HEAD
 import { identifyVideoById } from '../utils/identify-video-by-id'
+=======
+>>>>>>> parent of 1b1f99e... 'idenfiy-video-by-id-to-CLEAN'
 
 interface videoIdInterface{
     id:string;
@@ -17,19 +20,23 @@ const AddVideo:React.FC = ()=>{
 
     const onSubmit = async(e:React.FormEvent)=>{
         e.preventDefault();
-        const data = await fetchDataFromApi(videoInfo)
+        const data = await fetchYtApi(videoInfo)
         console.log('ASYNC DATA:', data);
     }
 
-    const checkVideoID =async (value:string)=>{
+    const checkVideoID =(value:string)=>{
         const checkIfURL = isURL(value);
         if(checkIfURL){
             const {id, service} = getVideoId(value)
             setVideoInfo({id:id!,service:service})
             
         }else{
+<<<<<<< HEAD
             const data = await identifyVideoById(value);
             console.log("DATA:",data);
+=======
+            setVideoInfo({id:value, service:null})
+>>>>>>> parent of 1b1f99e... 'idenfiy-video-by-id-to-CLEAN'
         }
     }
 
