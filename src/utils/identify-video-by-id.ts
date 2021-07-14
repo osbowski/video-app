@@ -1,6 +1,7 @@
 import axios from 'axios';
 import getVideoId from "get-video-id";
 
+
 const checkIfYoutube = async (videoId:string)=>{
     const endpoint =
     `https://youtube.googleapis.com/youtube/v3/videos?id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_API}`;
@@ -29,15 +30,14 @@ const checkIfVimeo = async (videoId:string)=>{
             }
         });
         const data =await response.data;
-        console.log(data);
 
         if(data){
             return `https://vimeo.com/${videoId}`
         }else{
-            console.log('error')
+           return;
         }
     }catch(error){
-        console.log('ERROR:',error)
+        console.log(error)
     }
 
 }
@@ -47,7 +47,7 @@ export const identifyVideoById =async (videoId:string)=>{
     if(checker){
         return getVideoId(checker)
     }else{
-        console.log('Wrong ID!')
+        return;
     }
 
 }

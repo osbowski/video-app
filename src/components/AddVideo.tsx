@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import getVideoId from "get-video-id";
 import fetchDataFromApi from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
-import { identifyVideoById } from '../utils/identify-video-by-id';
+import { identifyVideoById } from '../utils/identify-video-by-id'
 
 interface videoIdInterface{
     id:string;
@@ -28,16 +28,10 @@ const AddVideo:React.FC = ()=>{
             setVideoInfo({id:id!,service:service})
             
         }else{
-            const data= await identifyVideoById(value);
-            if(data){
-                const {id, service} = data;
-                setVideoInfo({id:id!, service:service})  
-            }
-
+            const data = await identifyVideoById(value);
+            console.log("DATA:",data);
         }
     }
-
-    console.log(videoInfo);
 
     return(
         <div>
