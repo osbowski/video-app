@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { fetchedVideo } from '../types';
 
-const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
+const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
 
     let fetchedVideo:fetchedVideo;
+
     const {id, service} = videoId;
 
     if(service==='youtube'){
@@ -12,8 +13,21 @@ const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
         &fields=items(id,snippet(title,publishedAt),statistics(viewCount,likeCount))&part=snippet,statistics`;
         try{
             const response = await axios.get(endpoint);
-            const data = await response.data.items[0]
-            console.log(data);
+            const fetchedData = await response.data.items[0]
+            const {title,publishedAt} = fetchedData.snippet;
+            const {likeCount, viewCount} = fetchedData.statistics;
+            fetchedVideo = {
+                id,
+                service,
+                data:{
+                    title,
+                    publishedAt,
+                    views:viewCount,
+                    likes:likeCount,
+                    link:`https://www.youtube.com/watch?v=${id}`
+                }
+            }
+            return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
         }
@@ -21,14 +35,26 @@ const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
 
         const endpoint =
         `https://api.vimeo.com/videos/${id}`;
+        
         try{
             const response = await axios.get(endpoint,{
                 headers:{
                     Authorization: `Bearer ${process.env.REACT_APP_VIMEO_TOKEN}`,
                 }
             });
-            const fetchedMovieData =await response.data;
-            return fetchedMovieData;
+            const fetchedData =await response.data;
+            fetchedVideo = {
+                id,
+                service,
+                data:{
+                    title:fetchedData.name,
+                    publishedAt:fetchedData.created_time,
+                    views:fetchedData.stats.plays,
+                    likes:fetchedData.metadata.connections.likes.total,
+                    link:fetchedData.link
+                }
+            }
+            return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
         }
@@ -37,4 +63,4 @@ const fetchYtApi= async (videoId:{id:string, service:string|null})=>{
     }
 }
 
-export default fetchYtApi
+export default fetchVideoData;
