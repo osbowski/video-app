@@ -2,9 +2,7 @@ import axios from 'axios';
 import { fetchedVideo } from '../types';
 
 const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
-
     let fetchedVideo:fetchedVideo;
-
     const {id, service} = videoId;
 
     if(service==='youtube'){

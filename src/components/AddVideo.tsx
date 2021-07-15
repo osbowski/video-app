@@ -28,7 +28,12 @@ const AddVideo:React.FC = ()=>{
             
         }else{
             const data = await identifyVideoById(value);
-            console.log("DATA:",data);
+            console.log('DATA FROM ID',data)
+            if(data){
+                const {id, service} = data;
+                setVideoInfo({id:id!,service});
+            }
+            
         }
     }
 
