@@ -57,7 +57,7 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
             console.log('ERROR:',error)
         }
     }else{
-       return 'WRONG URL'
+       return;
     }
 }
 

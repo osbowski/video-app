@@ -1,7 +1,4 @@
-import {fetchedVideo} from '../types';
-interface initialStateInterface{
-    videos:fetchedVideo[]
-}
+import { initialStateInterface } from '../types';
 
 export const initialState:initialStateInterface = {
     videos:[

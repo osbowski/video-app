@@ -3,6 +3,7 @@ import getVideoId from "get-video-id";
 import fetchVideoData from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
 import { identifyVideoById } from '../utils/identify-video-by-id'
+import { addToStorage } from '../storage/addToStorage';
 
 interface videoIdInterface{
     id:string;
@@ -13,13 +14,6 @@ interface videoIdInterface{
 const AddVideo:React.FC = ()=>{
     const [videoInfo,setVideoInfo] = useState<videoIdInterface>({id:'',service:null});
     
-
-    const onSubmit = async (e:React.FormEvent)=>{
-        e.preventDefault();
-        const data = await fetchVideoData(videoInfo)
-        console.log('ASYNC DATA:', data);
-    }
-
     const checkVideoID =async (value:string)=>{
         const checkIfURL = isURL(value);
         if(checkIfURL){
@@ -28,7 +22,6 @@ const AddVideo:React.FC = ()=>{
             
         }else{
             const data = await identifyVideoById(value);
-            console.log('DATA FROM ID',data)
             if(data){
                 const {id, service} = data;
                 setVideoInfo({id:id!,service});
@@ -36,6 +29,15 @@ const AddVideo:React.FC = ()=>{
             
         }
     }
+    const onSubmit = async (e:React.FormEvent)=>{
+        e.preventDefault();
+        const data = await fetchVideoData(videoInfo)
+        if(data){
+            addToStorage(data);
+        }
+    }
+
+   
 
     return(
         <div>
