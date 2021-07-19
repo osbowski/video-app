@@ -1,4 +1,4 @@
-import { fetchedVideo } from "../types";
+import { fetchedVideo } from "../../types";
 
 export const getFromStorage=(key:string, initialValue:fetchedVideo[])=> {
     try {

@@ -4,7 +4,7 @@ import fetchVideoData from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
 import { identifyVideoById } from '../utils/identify-video-by-id'
 import { fetchedVideo } from '../types';
-import { addToStorage } from "../storage/addToStorage";
+import { addToStorage } from "../store/addToStorage";
 
 interface videoIdInterface{
     id:string;

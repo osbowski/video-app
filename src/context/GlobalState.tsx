@@ -1,5 +1,5 @@
 import { createContext,useEffect, useState} from 'react';
-import { getFromStorage } from '../storage/getFromStorage';
+import { getFromStorage } from '../store/localStorage/getFromStorage';
 import { initialState } from './initialState';
 
 // const state = getFromStorage('videos',initialState);
