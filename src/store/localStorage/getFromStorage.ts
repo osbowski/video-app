@@ -1,10 +1,6 @@
 import { fetchedVideo } from "../../types";
 
-export const getFromStorage=(key:string, initialValue:fetchedVideo[])=> {
-    try {
-      const value = window.localStorage.getItem(key);
+export const getFromStorage=(key:string, initialValue:fetchedVideo[]):fetchedVideo[]=> {
+      const value = localStorage.getItem(key);
       return value ? JSON.parse(value) : initialValue;
-    } catch (error) {
-      return initialValue;
-    }
   }

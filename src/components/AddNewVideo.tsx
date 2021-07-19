@@ -13,7 +13,6 @@ interface videoIdInterface{
 
 const AddNewVideo:React.FC = ()=>{
     const [videoInfo,setVideoInfo] = useState<videoIdInterface>({id:'',service:null});
-    // const [videos, setVideos] = useState<fetchedVideo[]>([])
     const {dispatch} = useContext(GlobalContext);
 
 

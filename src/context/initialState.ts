@@ -1,4 +1,6 @@
-export const initialState=[
+import { fetchedVideo } from "../types";
+
+export const initialState:fetchedVideo[]=[
     {
         id:'123',
         service:'youtube',
@@ -31,6 +33,6 @@ export const initialState=[
                 likes:12300000,
                 views:3455039209,
                 publishedAt: '17.09.2009'
+            }
     }
-}
 ]
