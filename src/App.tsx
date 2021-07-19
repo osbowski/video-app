@@ -1,7 +1,7 @@
 
 import { GlobalProvider } from './context/GlobalState'
 import './App.css';
-import AddVideo from './components/AddVideo';
+import AddNewVideo from './components/AddNewVideo';
 import Nav from './components/Nav';
 import VideoList from './components/VideoList';
 
@@ -11,7 +11,7 @@ const App=()=>{
     <div className="App">
       <Nav />
       <VideoList />
-      <AddVideo />
+      <AddNewVideo />
     </div>
     </GlobalProvider>
   );

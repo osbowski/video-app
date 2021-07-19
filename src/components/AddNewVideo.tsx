@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext} from "react";
 import getVideoId from "get-video-id";
 import fetchVideoData from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
 import { identifyVideoById } from '../utils/identify-video-by-id'
-import { fetchedVideo } from '../types';
-import { addToStorage } from "../store/addToStorage";
+import { GlobalContext } from "../context/GlobalState";
 
 interface videoIdInterface{
     id:string;
@@ -12,16 +11,10 @@ interface videoIdInterface{
 }
 
 
-const AddVideo:React.FC = ()=>{
+const AddNewVideo:React.FC = ()=>{
     const [videoInfo,setVideoInfo] = useState<videoIdInterface>({id:'',service:null});
-    const [videos, setVideos] = useState<fetchedVideo[]>([])
-
-    useEffect(() => {
-        console.log(videos)
-        if(videos.length>0){
-            addToStorage(videos);
-        }
-    }, [videos])
+    // const [videos, setVideos] = useState<fetchedVideo[]>([])
+    const {dispatch} = useContext(GlobalContext);
 
 
     const checkVideoID =async (value:string)=>{
@@ -43,7 +36,9 @@ const AddVideo:React.FC = ()=>{
         e.preventDefault();
         const data = await fetchVideoData(videoInfo)
         if(data){
-            setVideos([...videos,data])
+            dispatch({type:"ADD_VIDEO", payload:data})
+            return data;
+
         }
     }
 
@@ -61,4 +56,4 @@ const AddVideo:React.FC = ()=>{
     )
     }
 
-export default AddVideo;
+export default AddNewVideo;

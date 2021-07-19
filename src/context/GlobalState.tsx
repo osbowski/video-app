@@ -1,23 +1,22 @@
-import { createContext,useEffect, useState} from 'react';
+import { createContext, useReducer, useEffect} from 'react';
 import { getFromStorage } from '../store/localStorage/getFromStorage';
+import VideoReducer from '../store/reducers/videoReducer';
 import { initialState } from './initialState';
 
-// const state = getFromStorage('videos',initialState);
-
-export const GlobalContext = createContext(initialState);
-
+const state = getFromStorage('videos',initialState);
+export const GlobalContext = createContext(state);  
 
 export const GlobalProvider:React.FC = ({children})=>{
-    const [state, setState] = useState([]);
+    const [videos,dispatch] = useReducer(VideoReducer,state);
 
     useEffect(() => {
-        setState(getFromStorage('videos',initialState))
-        console.log('Set state!',state)
-    }, [])
+        getFromStorage('videos',videos)
+    }, [videos])
 
 return(
-        <GlobalContext.Provider value={state}>
+        <GlobalContext.Provider value={{videos,dispatch}}>
             {children}
         </GlobalContext.Provider>
     )
 }
+

@@ -6,7 +6,7 @@ import { fetchedVideo } from "../types";
 
 
 const VideoList:React.FC = ()=>{
-    const videos = useContext(GlobalContext);
+    const {videos} = useContext(GlobalContext);
     return(
         <div className="video-list">
             <h1>Twoje filmy</h1>
