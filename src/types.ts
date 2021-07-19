@@ -36,8 +36,3 @@ export interface fetchedVideo{
     service:string,
     data:videoData,
 }
-
-
-export interface initialStateInterface{
-    videos:fetchedVideo[]
-}

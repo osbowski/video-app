@@ -1,11 +1,10 @@
-import { initialStateInterface } from '../types';
+import { fetchedVideo } from "../types";
 
-export const getLocalStorage=(key:string, initialValue:initialStateInterface)=> {
+export const getFromStorage=(key:string, initialValue:fetchedVideo[])=> {
     try {
       const value = window.localStorage.getItem(key);
       return value ? JSON.parse(value) : initialValue;
-    } catch (e) {
-      // if error, return initial value
+    } catch (error) {
       return initialValue;
     }
   }

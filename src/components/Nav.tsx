@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/GlobalState";
 
 const Nav:React.FC = ()=>{
 
-    const { videos } = useContext(GlobalContext);
+    const videos = useContext(GlobalContext);
     
     const syntax = ()=>{
         let word:string;
