@@ -24,8 +24,7 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                     likes:likeCount,
                     link:`https://www.youtube.com/watch?v=${id}`
                 }
-            }
-            console.log('FETCH FROM YT:',fetchedVideo)
+            }  
             return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
@@ -53,7 +52,6 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                     link:fetchedData.link
                 }
             }
-            console.log('FETCH FROM VIMEO:',fetchedVideo)
             return fetchedVideo;
         }catch(error){
         }

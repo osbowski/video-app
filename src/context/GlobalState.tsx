@@ -1,5 +1,4 @@
-import { createContext, useReducer, useEffect, useRef, Dispatch} from 'react';
-import { addToStorage } from '../store/localStorage/addToStorage';
+import { createContext, useReducer, useEffect, Dispatch} from 'react';
 import { getFromStorage } from '../store/localStorage/getFromStorage';
 import VideoReducer from '../store/reducers/videoReducer';
 import { fetchedVideo } from '../types';
@@ -24,7 +23,7 @@ export const GlobalProvider:React.FC = ({children})=>{
     });
 
     useEffect(() => {
-        addToStorage(videos)
+        localStorage.setItem('videos',JSON.stringify(videos))
     }, [videos])
 
 

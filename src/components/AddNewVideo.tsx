@@ -4,6 +4,7 @@ import fetchVideoData from "../utils/fetch-from-api";
 import isURL from 'validator/lib/isURL';
 import { identifyVideoById } from '../utils/identify-video-by-id'
 import { GlobalContext } from "../context/GlobalState";
+import { addVideo } from '../store/action-creators/addVideo';
 
 interface videoIdInterface{
     id:string;
@@ -13,6 +14,7 @@ interface videoIdInterface{
 
 const AddNewVideo:React.FC = ()=>{
     const [videoInfo,setVideoInfo] = useState<videoIdInterface>({id:'',service:null});
+    const [inputValue, setInputValue] =useState('');
     const {dispatch} = useContext(GlobalContext);
 
 
@@ -35,20 +37,22 @@ const AddNewVideo:React.FC = ()=>{
         e.preventDefault();
         const data = await fetchVideoData(videoInfo)
         if(data){
-            dispatch({type:"ADD_VIDEO", payload:data})
-            return data;
-
+            dispatch(addVideo(data))
         }
+        setInputValue('');
     }
 
    
 
     return(
         <div>
-            <h3>Dodaj nowy film do listy</h3>
+            <h3>Add new video to list.</h3>
         <form onSubmit={onSubmit}>
-            <input type="text" onChange={(e)=>checkVideoID(e.target.value)} />
-            <button type='submit'>Dodaj</button>
+            <input type="text" value={inputValue} onChange={(e)=>{
+                setInputValue(e.target.value);
+                checkVideoID(e.target.value)
+                }} />
+            <button type='submit'>Add video</button>
 
         </form>
         </div>

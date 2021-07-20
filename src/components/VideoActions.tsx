@@ -1,10 +1,21 @@
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
+import { removeVideo } from '../store/action-creators/removeVideo';
 
-const VideoActions:React.FC = ()=>{
+interface VideoActionsProps{
+    id:string;
+}
+
+const VideoActions:React.FC<VideoActionsProps> = ({id})=>{
+    const {dispatch} = useContext(GlobalContext);
+    const handleRemove = ()=>{
+        dispatch(removeVideo(id))
+    }
     return(
         <div>
-            <button>Obejrzyj</button>
-            <button>Usuń</button>
-            <button>Dodaj do ulubionych</button>
+            <button>Watch</button>
+            <button onClick={handleRemove}>Remove</button>
+            <button>Add to favorites</button>
         </div>
     )
 }

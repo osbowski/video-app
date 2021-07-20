@@ -14,7 +14,7 @@ const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
             <h3>{title}</h3>
             <p>{video.service}</p>
             <div>{link}</div>
-            <VideoActions />
+            <VideoActions id={video.id} />
             
         </div>
     )

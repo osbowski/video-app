@@ -8,9 +8,9 @@ const VideoData:React.FC<VideoDataProps> = ({data})=>{
     const {likes, views, publishedAt} = data;
     return(
         <div className="video-data-container">
-            <p>Odtworzenia: {views}</p>
-            <p>Polubienia: {likes}</p>
-            <p>Data dodania: {publishedAt}</p>
+            <p>Views: {views}</p>
+            <p>Likes: {likes}</p>
+            <p>Published At: {publishedAt}</p>
         </div>
     )
 }
