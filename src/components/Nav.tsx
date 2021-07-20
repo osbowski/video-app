@@ -1,13 +1,18 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
+import { Navbar, NavbarBrand, NavbarText } from "reactstrap";
 
 const Nav:React.FC = ()=>{
     const {videos} = useContext(GlobalContext);
     return(
-        <nav className="nav">
-            <div>VideoList APP</div>
-            <div>You have {videos.length} {videos.length===1 ? 'video' : 'videos'} on list.</div>
-        </nav>
+        <Navbar role='navigation' color='dark' fixed='top' className="px-5">
+            <NavbarBrand>VideoList APP</NavbarBrand>
+            <NavbarText className='text-light'>
+                You have 
+                <span className="text-primary"> {videos.length} </span>
+                {videos.length===1 ? 'video' : 'videos'} on list.
+            </NavbarText>
+        </Navbar>
     )
 }
 
