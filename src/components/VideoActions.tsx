@@ -21,7 +21,7 @@ const VideoActions:React.FC<VideoActionsProps> = ({video})=>{
     
     return(
         <div>
-            <button>Watch</button>
+            <a href={video.data.link}>Watch</a>
             <button onClick={handleRemove}>Remove</button>
             <button onClick={handleFavorite}>{favorite? 'Remove from favorites': 'Add to favorites'}</button>
         </div>
