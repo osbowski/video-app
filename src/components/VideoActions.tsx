@@ -4,6 +4,8 @@ import { addToFavorites } from '../store/action-creators/addToFavorites';
 import { removeVideo } from '../store/action-creators/removeVideo';
 import { fetchedVideo } from '../types';
 
+import { Button } from 'reactstrap';
+
 interface VideoActionsProps{
     video:fetchedVideo;
 }
@@ -20,10 +22,10 @@ const VideoActions:React.FC<VideoActionsProps> = ({video})=>{
     }
     
     return(
-        <div>
-            <a href={video.data.link}>Watch</a>
-            <button onClick={handleRemove}>Remove</button>
-            <button onClick={handleFavorite}>{favorite? 'Remove from favorites': 'Add to favorites'}</button>
+        <div>   
+            <Button className='bg-primary' href={video.data.link}>Watch</Button>
+            <Button className='mx-2 bg-danger' onClick={handleRemove}>Remove</Button>
+            <Button className='bg-warning' onClick={handleFavorite}>{favorite? 'Remove from favorites': 'Add to favorites'}</Button>
         </div>
     )
 }

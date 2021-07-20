@@ -8,7 +8,7 @@ import { fetchedVideo } from "../types";
 const VideoList:React.FC = ()=>{
     const {videos} = useContext(GlobalContext);
     return(
-        <div className="video-list">
+        <div className='d-flex flex-column align-items-center'>
             <h1>Your videos</h1>
             {videos.map((video:fetchedVideo)=>(
                 <VideoListElement key={video.id} video={video} />

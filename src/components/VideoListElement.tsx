@@ -2,6 +2,7 @@ import { fetchedVideo } from "../types";
 import VideoActions from "./VideoActions"
 import VideoData from "./VideoData"
 import ReactPlayer from 'react-player';
+import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 
 interface VideoListElementProps{
     video:fetchedVideo;
@@ -10,15 +11,17 @@ interface VideoListElementProps{
 const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
     const {link, title} = video.data;
     return(
-        <div className="video-list-element">
-            <VideoData data={video.data}/>
-            <h3>{title}</h3>
-            <p>{video.service}</p>
-            <p>Favorite: {video.favorite ? 'yes' : 'no'}</p>
+        <Card className='w-75 my-5 bg-light'>
+            <CardTitle tag='h5' className='text-center py-3 mb-0'>{title}</CardTitle>
             <ReactPlayer url={link} light={true} playing={true} controls={true} width={'100%'}/>
-            <VideoActions video={video} />
-            
-        </div>
+            <CardBody tag='h6' className='px-4 mt-4'>
+                <VideoData data={video.data} />
+            </CardBody>
+            <CardSubtitle className='pb-4 text-center'>
+                    <VideoActions video={video}/>
+                
+            </CardSubtitle>
+        </Card>
     )
 }
 

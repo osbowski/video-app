@@ -10,7 +10,7 @@ const VideoData:React.FC<VideoDataProps> = ({data})=>{
         <div className="video-data-container">
             <p>Views: {views}</p>
             <p>Likes: {likes}</p>
-            <p>Published At: {publishedAt}</p>
+            <p>Published At: {new Date(publishedAt).toLocaleString().split(',')[0]}</p>
         </div>
     )
 }
