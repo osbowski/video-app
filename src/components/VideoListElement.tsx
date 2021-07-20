@@ -13,8 +13,9 @@ const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
             <VideoData data={video.data}/>
             <h3>{title}</h3>
             <p>{video.service}</p>
+            <p>Favorite: {video.favorite ? 'yes' : 'no'}</p>
             <div>{link}</div>
-            <VideoActions id={video.id} />
+            <VideoActions video={video} />
             
         </div>
     )

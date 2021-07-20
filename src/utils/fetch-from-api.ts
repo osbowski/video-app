@@ -17,6 +17,7 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
             fetchedVideo = {
                 id,
                 service,
+                favorite:false,
                 data:{
                     title,
                     publishedAt,
@@ -44,6 +45,7 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
             fetchedVideo = {
                 id,
                 service,
+                favorite:false,
                 data:{
                     title:fetchedData.name,
                     publishedAt:fetchedData.created_time,

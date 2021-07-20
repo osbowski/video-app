@@ -6,7 +6,8 @@ export interface videoData{
     link:string;
 }
 export interface fetchedVideo{
-    id:string,
-    service:string,
-    data:videoData,
+    id:string;
+    service:string;
+    favorite:boolean;
+    data:videoData;
 }

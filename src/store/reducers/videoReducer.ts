@@ -2,6 +2,7 @@ import { fetchedVideo } from "../../types";
 
 
 const VideoReducer= (state:fetchedVideo[],action:any)=>{
+    console.log(state)
     switch(action.type){
         case "ADD_VIDEO":
             return [
@@ -12,7 +13,9 @@ const VideoReducer= (state:fetchedVideo[],action:any)=>{
             return state.filter(video =>video.id !== action.payload)
 
         case "ADD_VIDEO_TO_FAVORITES":
-            return state;   
+            return state.map(video=>(
+                    video.id===action.payload ? {...video, favorite:!video.favorite} : video
+                ))
         default:
             return state;
     }
