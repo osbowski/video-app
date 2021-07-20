@@ -1,8 +1,6 @@
 import { fetchedVideo } from "../../types";
 
-
 const VideoReducer= (state:fetchedVideo[],action:any)=>{
-    console.log(state)
     switch(action.type){
         case "ADD_VIDEO":
             return [
