@@ -5,6 +5,7 @@ import isURL from 'validator/lib/isURL';
 import { identifyVideoById } from '../utils/identify-video-by-id'
 import { GlobalContext } from "../context/GlobalState";
 import { addVideo } from '../store/action-creators/addVideo';
+import { Button, Form, FormGroup, Input } from "reactstrap";
 
 interface videoIdInterface{
     id:string;
@@ -45,16 +46,19 @@ const AddNewVideo:React.FC = ()=>{
    
 
     return(
-        <div>
+        <div className='text-center'>
             <h3>Add new video to list.</h3>
-        <form onSubmit={onSubmit}>
-            <input type="text" value={inputValue} onChange={(e)=>{
-                setInputValue(e.target.value);
-                checkVideoID(e.target.value)
-                }} />
-            <button type='submit'>Add video</button>
-
-        </form>
+        
+        <Form className='d-flex justify-content-center' onSubmit={onSubmit}>
+            <FormGroup>
+                <Input className='rounded-0' invalid={false} type="text" value={inputValue} onChange={(e)=>{
+                    setInputValue(e.target.value);
+                    checkVideoID(e.target.value)
+                    }} />
+            </FormGroup>
+                <Button className='rounded-0' color='primary'>Add video</Button>
+        </Form>
+       
         </div>
     )
     }

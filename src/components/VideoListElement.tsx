@@ -11,7 +11,7 @@ interface VideoListElementProps{
 const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
     const {link, title} = video.data;
     return(
-        <Card className='w-75 my-5 bg-light'>
+        <Card className={`w-75 my-5 rounded-0 ${video.favorite ? 'bg-warning' : 'bg-light' }`}>
             <CardTitle tag='h5' className='text-center py-3 mb-0'>{title}</CardTitle>
             <ReactPlayer url={link} light={true} playing={true} controls={true} width={'100%'}/>
             <CardBody tag='h6' className='px-4 mt-4'>
@@ -19,7 +19,6 @@ const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
             </CardBody>
             <CardSubtitle className='pb-4 text-center'>
                     <VideoActions video={video}/>
-                
             </CardSubtitle>
         </Card>
     )
