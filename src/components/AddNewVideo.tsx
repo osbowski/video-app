@@ -46,7 +46,7 @@ const AddNewVideo:React.FC = ()=>{
    
 
     return(
-        <div className='text-center'>
+        <div className='text-center mb-5'>
             <h3>Add new video to list.</h3>
         
         <Form className='d-flex justify-content-center' onSubmit={onSubmit}>
