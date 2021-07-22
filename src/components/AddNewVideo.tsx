@@ -41,6 +41,7 @@ const AddNewVideo:React.FC = ()=>{
             dispatch(addVideo(data))
         }
         setInputValue('');
+        setVideoInfo({id:'',service:null})
     }
 
    
@@ -56,7 +57,7 @@ const AddNewVideo:React.FC = ()=>{
                     checkVideoID(e.target.value)
                     }} />
             </FormGroup>
-                <Button className='rounded-0' color='primary'>Add video</Button>
+                <Button disabled={videoInfo.service ? false : true} className='rounded-0' color='primary' >Add video</Button>
         </Form>
        
         </div>

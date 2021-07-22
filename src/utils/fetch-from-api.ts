@@ -56,7 +56,6 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                     link:fetchedData.link
                 }
             }
-            console.log(fetchedVideo);
             return fetchedVideo;
         }catch(error){
         }
