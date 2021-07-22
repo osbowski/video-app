@@ -26,6 +26,8 @@ const VideoList:React.FC = ()=>{
             {videos.slice(visitedPages, visitedPages + videosPerPage).map((video:fetchedVideo)=>(
                 <VideoListElement key={video.id} video={video} />
             ))}
+
+        {videos.length>5 ? (
         <ReactPaginate
         previousLabel={"<<"}
         nextLabel={">>"}
@@ -38,8 +40,9 @@ const VideoList:React.FC = ()=>{
         activeClassName={"paginationActive"}
         pageRangeDisplayed={5}
         marginPagesDisplayed={1}
-
       />
+        ) : ''}
+
         </div>
     )
 }
