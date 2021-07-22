@@ -3,7 +3,7 @@ import { fetchedVideo } from "../types";
 import VideoActions from "./VideoActions"
 import VideoData from "./VideoData"
 import ReactPlayer from 'react-player';
-import { Button, Card, CardBody, CardSubtitle, CardTitle, Modal, ModalBody } from "reactstrap";
+import { Card, CardBody, CardSubtitle, CardTitle, Modal, ModalBody } from "reactstrap";
 
 interface VideoListElementProps{
     video:fetchedVideo;
@@ -19,7 +19,7 @@ const VideoListElement:React.FC<VideoListElementProps> = ({video})=>{
     return(
         <Card className={`w-75 my-5 rounded-0 ${video.favorite ? 'bg-warning' : 'bg-light' }`}>
             <CardTitle tag='h5' className='text-center py-3 mb-0'>{title}</CardTitle>
-            <Button onClick={toggleModal}>Open Modal</Button>
+            <img src={video.data.thumbnail} alt='' onClick={toggleModal} />
             <Modal isOpen={modal} toggle={toggleModal}>
                 <ModalBody>
                     <ReactPlayer url={link} playing={true} controls={true} width={'100%'}/>

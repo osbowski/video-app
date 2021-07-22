@@ -4,6 +4,7 @@ export interface videoData{
     likes:number;
     publishedAt:string;
     link:string;
+    thumbnail:string;
 }
 export interface fetchedVideo{
     id:string;

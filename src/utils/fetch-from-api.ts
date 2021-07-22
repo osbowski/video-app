@@ -8,11 +8,11 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
     if(service==='youtube'){
         const endpoint =
         `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.REACT_APP_YOUTUBE_API}
-        &fields=items(id,snippet(title,publishedAt),statistics(viewCount,likeCount))&part=snippet,statistics`;
+        &fields=items(id,snippet(title,publishedAt,thumbnails),statistics(viewCount,likeCount))&part=snippet,statistics`;
         try{
             const response = await axios.get(endpoint);
             const fetchedData = await response.data.items[0]
-            const {title,publishedAt} = fetchedData.snippet;
+            const {title,publishedAt,thumbnails} = fetchedData.snippet;
             const {likeCount, viewCount} = fetchedData.statistics;
             fetchedVideo = {
                 id,
@@ -21,11 +21,12 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                 data:{
                     title,
                     publishedAt,
+                    thumbnail:thumbnails.high.url,
                     views:viewCount,
                     likes:likeCount,
                     link:`https://www.youtube.com/watch?v=${id}`
                 }
-            }  
+            } 
             return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
@@ -49,11 +50,13 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                 data:{
                     title:fetchedData.name,
                     publishedAt:fetchedData.created_time,
+                    thumbnail:fetchedData.pictures.sizes[3].link,
                     views:fetchedData.stats.plays,
                     likes:fetchedData.metadata.connections.likes.total,
                     link:fetchedData.link
                 }
             }
+            console.log(fetchedVideo);
             return fetchedVideo;
         }catch(error){
         }
