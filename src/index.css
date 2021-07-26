@@ -2,6 +2,11 @@ body {
     padding-top: 100px;
  }
 
+ #root{
+   padding-left: 30px;
+   padding-right: 30px;
+ }
+
  .paginationBttns {
     width: 100%;
     height: 40px;
@@ -37,4 +42,22 @@ body {
 
   .previousBttn, .nextBttn{
       width:50px;
+  }
+
+  .video-title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .video-thumbnail{
+    cursor: pointer;
+  }
+
+  .fav-icon-container{
+    height: 40px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }

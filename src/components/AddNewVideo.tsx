@@ -36,6 +36,7 @@ const AddNewVideo:React.FC = ()=>{
     }
     const onSubmit = async (e:React.FormEvent)=>{
         e.preventDefault();
+        await checkVideoID(inputValue)
         const data = await fetchVideoData(videoInfo)
         if(data){
             dispatch(addVideo(data))
@@ -55,6 +56,7 @@ const AddNewVideo:React.FC = ()=>{
                 <Input className='rounded-0' invalid={false} type="text" value={inputValue} onChange={(e)=>{
                     setInputValue(e.target.value);
                     checkVideoID(e.target.value)
+                    
                     }} />
             </FormGroup>
                 <Button disabled={videoInfo.service ? false : true} className='rounded-0' color='primary' >Add video</Button>

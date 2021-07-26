@@ -21,12 +21,13 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                 data:{
                     title,
                     publishedAt,
-                    thumbnail:thumbnails.high.url,
+                    thumbnail:thumbnails.maxres.url,
                     views:viewCount,
                     likes:likeCount,
                     link:`https://www.youtube.com/watch?v=${id}`
                 }
-            } 
+            }
+            console.log(thumbnails)
             return fetchedVideo;
         }catch(error){
             console.log('ERROR:',error)
@@ -50,12 +51,13 @@ const fetchVideoData= async (videoId:{id:string, service:string|null})=>{
                 data:{
                     title:fetchedData.name,
                     publishedAt:fetchedData.created_time,
-                    thumbnail:fetchedData.pictures.sizes[3].link,
+                    thumbnail:fetchedData.pictures.sizes[5].link,
                     views:fetchedData.stats.plays,
                     likes:fetchedData.metadata.connections.likes.total,
                     link:fetchedData.link
                 }
             }
+            console.log(fetchedData.pictures)
             return fetchedVideo;
         }catch(error){
         }

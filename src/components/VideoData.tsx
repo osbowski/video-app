@@ -1,4 +1,5 @@
 import { videoData } from "../types";
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 interface VideoDataProps{
     data:videoData;
@@ -7,11 +8,11 @@ interface VideoDataProps{
 const VideoData:React.FC<VideoDataProps> = ({data})=>{
     const {likes, views, publishedAt} = data;
     return(
-        <div className="video-data-container">
-            <p>Views: {views}</p>
-            <p>Likes: {likes}</p>
-            <p>Published At: {new Date(publishedAt).toLocaleString().split(',')[0]}</p>
-        </div>
+        <ListGroup flush className="video-data-container">
+            <ListGroupItem className='bg-light'>Views: {views}</ListGroupItem>
+            <ListGroupItem className='bg-light'>Likes: {likes}</ListGroupItem>
+            <ListGroupItem className='bg-light'>Published At: {new Date(publishedAt).toLocaleString().split(',')[0]}</ListGroupItem>
+        </ListGroup>
     )
 }
 
