@@ -33,17 +33,17 @@ const AddNewVideo: React.FC = () => {
   const dismissAlert = ()=>{
     setTimeout(()=>{
       setError(false);
-    },3000)
+    },5000)
   }
 
   return (
-    <div className="text-center my-5">
+    <div className="text-center mt-5 mb-5" id='addForm'>
       <h3>Add new video to list.</h3>
       <div className='alert-container'>
       {loading ? <Spinner size='xl' color="dark" children='' /> : ''}
       {error ? (
         <Alert color='danger' className='p-2'>
-          Wrong ID or URL!
+          This is not ID/URL of Vimeo or  Youtube Video
         </Alert>
       ) : (
         ''
