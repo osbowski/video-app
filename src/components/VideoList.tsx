@@ -21,7 +21,6 @@ const VideoList: React.FC = () => {
     setPageNumber(selected);
   };
 
-  console.log('View only favorites',favsOnly)
 
   return (
     <>

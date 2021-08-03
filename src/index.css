@@ -63,6 +63,10 @@ body {
   justify-content: flex-end;
 }
 
+.alert-container{
+  height: 50px;
+}
+
 @media(max-width:960px){
   body{
     font-size: 0.7rem !important;

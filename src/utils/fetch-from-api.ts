@@ -23,7 +23,9 @@ const fetchVideoData = async (videoId: {
         data: {
           title,
           date: Date.now(),
-          thumbnail: thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url,
+          thumbnail: thumbnails.maxres
+            ? thumbnails.maxres.url
+            : thumbnails.high.url,
           views: viewCount,
           likes: likeCount,
           link: `https://www.youtube.com/watch?v=${id}`,
@@ -32,7 +34,7 @@ const fetchVideoData = async (videoId: {
       console.log(thumbnails);
       return fetchedVideo;
     } catch (error) {
-      console.log("ERROR:", error);
+      return null;
     }
   } else if (service === "vimeo") {
     const endpoint = `https://api.vimeo.com/videos/${id}`;
@@ -50,7 +52,7 @@ const fetchVideoData = async (videoId: {
         favorite: false,
         data: {
           title: fetchedData.name,
-          date:Date.now(),
+          date: Date.now(),
           thumbnail: fetchedData.pictures.sizes[6].link,
           views: fetchedData.stats.plays,
           likes: fetchedData.metadata.connections.likes.total,
@@ -59,9 +61,12 @@ const fetchVideoData = async (videoId: {
       };
       console.log(fetchedData.pictures);
       return fetchedVideo;
-    } catch (error) {}
+    } catch (error) {
+      console.log("ERROR", error);
+      return null;
+    }
   } else {
-    return;
+    return null;
   }
 };
 
