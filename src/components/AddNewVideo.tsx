@@ -1,47 +1,24 @@
 import React, { useState, useContext } from "react";
-import getVideoId from "get-video-id";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import fetchVideoData from "../utils/fetch-from-api";
-import isURL from "validator/lib/isURL";
-import { identifyVideoById } from "../utils/identify-video-by-id";
+import { checkVideoID } from "../utils/check-video-id";
 import { GlobalContext } from "../context/GlobalState";
 import { addVideo } from "../store/action-creators/addVideo";
-import { Button, Form, FormGroup, Input } from "reactstrap";
 
-interface videoIdInterface {
-  id: string;
-  service: string | null;
-}
 
 const AddNewVideo: React.FC = () => {
-  const [videoInfo, setVideoInfo] = useState<videoIdInterface>({
-    id: "",
-    service: null,
-  });
   const [inputValue, setInputValue] = useState("");
   const { dispatch } = useContext(GlobalContext);
 
-  const checkVideoID = async (value: string) => {
-    const checkIfURL = isURL(value);
-    if (checkIfURL) {
-      const { id, service } = getVideoId(value);
-      setVideoInfo({ id: id!, service: service });
-    } else {
-      const data = await identifyVideoById(value);
-      if (data) {
-        const { id, service } = data;
-        setVideoInfo({ id: id!, service });
-      }
-    }
-  };
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await checkVideoID(inputValue);
-    const data = await fetchVideoData(videoInfo);
+    const videoId = await checkVideoID(inputValue);
+    const data = await fetchVideoData(videoId!);
     if (data) {
       dispatch(addVideo(data));
     }
     setInputValue("");
-    setVideoInfo({ id: "", service: null });
   };
 
   return (
@@ -57,12 +34,11 @@ const AddNewVideo: React.FC = () => {
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
-              checkVideoID(e.target.value);
             }}
           />
         </FormGroup>
         <Button
-          disabled={videoInfo.service ? false : true}
+
           className="rounded-0"
           color="primary"
         >
