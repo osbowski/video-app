@@ -10,11 +10,11 @@ const fetchVideoData = async (videoId: {
 
   if (service === "youtube") {
     const endpoint = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.REACT_APP_YOUTUBE_API}
-        &fields=items(id,snippet(title,publishedAt,thumbnails),statistics(viewCount,likeCount))&part=snippet,statistics`;
+        &fields=items(id,snippet(title, thumbnails),statistics(viewCount,likeCount))&part=snippet,statistics`;
     try {
       const response = await axios.get(endpoint);
       const fetchedData = await response.data.items[0];
-      const { title, publishedAt, thumbnails } = fetchedData.snippet;
+      const { title, thumbnails } = fetchedData.snippet;
       const { likeCount, viewCount } = fetchedData.statistics;
       fetchedVideo = {
         id,
@@ -22,7 +22,7 @@ const fetchVideoData = async (videoId: {
         favorite: false,
         data: {
           title,
-          publishedAt,
+          date: Date.now(),
           thumbnail: thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url,
           views: viewCount,
           likes: likeCount,
@@ -50,7 +50,7 @@ const fetchVideoData = async (videoId: {
         favorite: false,
         data: {
           title: fetchedData.name,
-          publishedAt: fetchedData.created_time,
+          date:Date.now(),
           thumbnail: fetchedData.pictures.sizes[6].link,
           views: fetchedData.stats.plays,
           likes: fetchedData.metadata.connections.likes.total,

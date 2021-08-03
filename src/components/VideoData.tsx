@@ -6,13 +6,13 @@ interface VideoDataProps {
 }
 
 const VideoData: React.FC<VideoDataProps> = ({ data }) => {
-  const { likes, views, publishedAt } = data;
+  const { likes, views, date } = data;
   return (
     <ListGroup flush className="video-data-container">
       <ListGroupItem className="bg-light">Views: {views}</ListGroupItem>
       <ListGroupItem className="bg-light">Likes: {likes}</ListGroupItem>
       <ListGroupItem className="bg-light">
-        Published: {new Date(publishedAt).toLocaleString().split(",")[0]}
+        Added: {new Date(date).toLocaleString().split(",")[0]}
       </ListGroupItem>
     </ListGroup>
   );

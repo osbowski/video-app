@@ -13,6 +13,7 @@ const VideoList: React.FC = () => {
   const visitedPages = pageNumber * videosPerPage;
 
   const [listLaoyut, setListLayout] = useState(false);
+  const [favsOnly, setFavsOnly] = useState(false);
 
   const pageCount = Math.ceil(videos.length / videosPerPage);
 
@@ -20,10 +21,13 @@ const VideoList: React.FC = () => {
     setPageNumber(selected);
   };
 
+  console.log('View only favorites',favsOnly)
+
   return (
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-end">
+        <Button  onClick={() => setFavsOnly(!favsOnly)}>Only favorites</Button>
         <Button onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
       </nav>
 
@@ -33,6 +37,7 @@ const VideoList: React.FC = () => {
             .slice(visitedPages, visitedPages + videosPerPage)
             .map((video: fetchedVideo) => (
               <VideoListElement
+                favsOnly = {favsOnly}
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
@@ -45,6 +50,7 @@ const VideoList: React.FC = () => {
             .slice(visitedPages, visitedPages + videosPerPage)
             .map((video: fetchedVideo) => (
               <VideoListElement
+                favsOnly = {favsOnly}
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
@@ -75,3 +81,8 @@ const VideoList: React.FC = () => {
 };
 
 export default VideoList;
+
+
+
+
+

@@ -14,11 +14,12 @@ import {
   Col,
   Row,
 } from "reactstrap";
-import { BsFillStarFill, BsFillCaretRightFill } from "react-icons/bs";
+import { BsFillStarFill} from "react-icons/bs";
 
 interface VideoListElementProps {
   video: fetchedVideo;
   listLayout: boolean;
+  favsOnly:boolean;
 }
 
 const VideoListElement: React.FC<VideoListElementProps> = ({
