@@ -53,6 +53,7 @@ body {
 
 .video-thumbnail {
   cursor: pointer;
+  max-height: 200px;
 }
 
 

@@ -23,7 +23,7 @@ const fetchVideoData = async (videoId: {
         data: {
           title,
           publishedAt,
-          thumbnail: thumbnails.maxres.url,
+          thumbnail: thumbnails.maxres ? thumbnails.maxres.url : thumbnails.high.url,
           views: viewCount,
           likes: likeCount,
           link: `https://www.youtube.com/watch?v=${id}`,
@@ -51,7 +51,7 @@ const fetchVideoData = async (videoId: {
         data: {
           title: fetchedData.name,
           publishedAt: fetchedData.created_time,
-          thumbnail: fetchedData.pictures.sizes[5].link,
+          thumbnail: fetchedData.pictures.sizes[6].link,
           views: fetchedData.stats.plays,
           likes: fetchedData.metadata.connections.likes.total,
           link: fetchedData.link,
