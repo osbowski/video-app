@@ -5,9 +5,10 @@ import { GlobalContext } from "../context/GlobalState";
 import VideoListElement from "./VideoListElement";
 import { fetchedVideo } from "../types";
 import { Row, Button } from "reactstrap";
+import { removeAllVideos } from "../store/action-creators/removeAllVIdeos";
 
 const VideoList: React.FC = () => {
-  const { videos } = useContext(GlobalContext);
+  const { videos, dispatch } = useContext(GlobalContext);
   const [pageNumber, setPageNumber] = useState(0);
   const videosPerPage = 6;
   const visitedPages = pageNumber * videosPerPage;
@@ -26,6 +27,7 @@ const VideoList: React.FC = () => {
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-end">
+      <Button  onClick={() => dispatch(removeAllVideos(videos))}>Remove all videos</Button>
         <Button  onClick={() => setFavsOnly(!favsOnly)}>Only favorites</Button>
         <Button onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
       </nav>

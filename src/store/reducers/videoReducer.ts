@@ -13,6 +13,10 @@ const VideoReducer = (state: fetchedVideo[], action: any) => {
           ? { ...video, favorite: !video.favorite }
           : video
       );
+
+      case "REMOVE_ALL_VIDEOS":
+        console.log('videos removed')
+        return [];
     default:
       return state;
   }
