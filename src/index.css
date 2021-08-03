@@ -55,10 +55,28 @@ body {
   cursor: pointer;
 }
 
+
 .fav-icon-container {
-  height: 40px;
-  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+@media(max-width:960px){
+  body{
+    font-size: 0.7rem !important;
+  }
+
+  .btn{
+    font-size:0.7rem !important;
+  }
+} 
+
+@media(max-width:450px){
+  .btn{
+    font-size:0.6rem !important;
+  }
+  .list-group-item{
+    font-size:0.6rem !important;
+  }
 }

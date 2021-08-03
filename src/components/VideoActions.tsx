@@ -4,13 +4,15 @@ import { addToFavorites } from "../store/action-creators/addToFavorites";
 import { removeVideo } from "../store/action-creators/removeVideo";
 import { fetchedVideo } from "../types";
 
-import { Button } from "reactstrap";
+import { Button, ButtonGroup } from "reactstrap";
+import { FaPlay, FaThumbsUp, FaThumbsDown, FaTrashAlt } from "react-icons/fa";
 
 interface VideoActionsProps {
   video: fetchedVideo;
+  listLayout: boolean;
 }
 
-const VideoActions: React.FC<VideoActionsProps> = ({ video }) => {
+const VideoActions: React.FC<VideoActionsProps> = ({ video, listLayout }) => {
   const { id, favorite } = video;
   const { dispatch } = useContext(GlobalContext);
   const handleRemove = () => {
@@ -22,17 +24,26 @@ const VideoActions: React.FC<VideoActionsProps> = ({ video }) => {
   };
 
   return (
-    <div>
-      <Button className="bg-primary rounded-0" href={video.data.link}>
-        Watch
+    <ButtonGroup vertical={listLayout}>
+      <Button
+        className="bg-primary rounded-0"
+        href={video.data.link}
+      >
+        <FaPlay />
       </Button>
-      <Button className="mx-2 bg-danger rounded-0" onClick={handleRemove}>
-        Remove
+      <Button
+        className="bg-warning rounded-0"
+        onClick={handleFavorite}
+      >
+        {favorite ? <FaThumbsDown /> : <FaThumbsUp />}
       </Button>
-      <Button className="bg-warning rounded-0" onClick={handleFavorite}>
-        {favorite ? "Remove from favorites" : "Add to favorites"}
+      <Button
+        className="bg-danger rounded-0"
+        onClick={handleRemove}
+      >
+        <FaTrashAlt />
       </Button>
-    </div>
+    </ButtonGroup>
   );
 };
 

@@ -12,10 +12,9 @@ const VideoData: React.FC<VideoDataProps> = ({ data }) => {
       <ListGroupItem className="bg-light">Views: {views}</ListGroupItem>
       <ListGroupItem className="bg-light">Likes: {likes}</ListGroupItem>
       <ListGroupItem className="bg-light">
-        Published At: {new Date(publishedAt).toLocaleString().split(",")[0]}
+        Published: {new Date(publishedAt).toLocaleString().split(",")[0]}
       </ListGroupItem>
     </ListGroup>
   );
 };
-
 export default VideoData;
