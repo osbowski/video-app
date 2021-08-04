@@ -29,49 +29,44 @@ const VideoList: React.FC = () => {
         <Button onClick={() => dispatch(removeAllVideos(videos))}>
           Remove all videos
         </Button>
-        <Button onClick={() => setFavsOnly(!favsOnly)}>{favsOnly ? 'Show all videos ':'Show only favorites'}</Button>
+        <Button onClick={() => setFavsOnly(!favsOnly)}>
+          {favsOnly ? "Show all videos " : "Show only favorites"}
+        </Button>
         <Button onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
       </nav>
 
-      {listLaoyut ? (
-        <>
-          {videos
-            .slice(visitedPages, visitedPages + videosPerPage)
-            .filter(video=>{
-              if(favsOnly){
-                return video.favorite===true;
-              }else{
-                return video
-              }
-            })
-            .map((video: fetchedVideo) => (
-              <VideoListElement 
-                listLayout={listLaoyut}
-                key={video.id}
-                video={video}
-              />
-            ))}
-        </>
-      ) : (
-        <Row>
-          {videos
-            .slice(visitedPages, visitedPages + videosPerPage)
-            .filter(video=>{
-              if(favsOnly){
-                return video.favorite===true;
-              }else{
-                return video
-              }
-            })
-            .map((video: fetchedVideo) => (
+      <Row>
+      {videos
+        .slice(visitedPages, visitedPages + videosPerPage)
+        .filter((video) => {
+          if (favsOnly) {
+            return video.favorite === true;
+          } else {
+            return video;
+          }
+        })
+        .map((video: fetchedVideo) =>
+          listLaoyut ? (
+            
               <VideoListElement
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
               />
-            ))}
+          
+          ) : (
+            
+            
+              <VideoListElement
+                listLayout={listLaoyut}
+                key={video.id}
+                video={video}
+              />
+          )
+          
+        )}
         </Row>
-      )}
+       
 
       {videos.length > 6 ? (
         <ReactPaginate
