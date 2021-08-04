@@ -22,13 +22,14 @@ const VideoList: React.FC = () => {
     setPageNumber(selected);
   };
 
-
   return (
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-end">
-      <Button  onClick={() => dispatch(removeAllVideos(videos))}>Remove all videos</Button>
-        <Button  onClick={() => setFavsOnly(!favsOnly)}>Only favorites</Button>
+        <Button onClick={() => dispatch(removeAllVideos(videos))}>
+          Remove all videos
+        </Button>
+        <Button onClick={() => setFavsOnly(!favsOnly)}>{favsOnly ? 'Show all videos ':'Show only favorites'}</Button>
         <Button onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
       </nav>
 
@@ -36,9 +37,15 @@ const VideoList: React.FC = () => {
         <>
           {videos
             .slice(visitedPages, visitedPages + videosPerPage)
+            .filter(video=>{
+              if(favsOnly){
+                return video.favorite===true;
+              }else{
+                return video
+              }
+            })
             .map((video: fetchedVideo) => (
-              <VideoListElement
-                favsOnly = {favsOnly}
+              <VideoListElement 
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
@@ -49,9 +56,15 @@ const VideoList: React.FC = () => {
         <Row>
           {videos
             .slice(visitedPages, visitedPages + videosPerPage)
+            .filter(video=>{
+              if(favsOnly){
+                return video.favorite===true;
+              }else{
+                return video
+              }
+            })
             .map((video: fetchedVideo) => (
               <VideoListElement
-                favsOnly = {favsOnly}
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
@@ -82,8 +95,3 @@ const VideoList: React.FC = () => {
 };
 
 export default VideoList;
-
-
-
-
-
