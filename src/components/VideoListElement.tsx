@@ -14,7 +14,7 @@ import {
   Col,
   Row,
 } from "reactstrap";
-import { BsFillStarFill} from "react-icons/bs";
+import { BsFillStarFill } from "react-icons/bs";
 
 interface VideoListElementProps {
   video: fetchedVideo;
@@ -51,7 +51,7 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
                 {title}
               </CardTitle>
             </Col>
-            <Col xs="2" >
+            <Col xs="2">
               <div className="fav-icon-container">
                 {video.favorite && (
                   <BsFillStarFill
@@ -63,7 +63,7 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
             </Col>
           </Row>
           <CardBody className="d-flex align-items-center">
-            <Col xs='5' md='3' lg='2'>
+            <Col xs="5" md="3" lg="2">
               <CardImg
                 className="video-thumbnail rounded-0"
                 src={video.data.thumbnail}
@@ -71,15 +71,14 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
                 onClick={toggleModal}
               />
             </Col>
-            <Col xs='5' md='7' lg='8' >
+            <Col xs="5" md="7" lg="8">
               <VideoData data={video.data} />
             </Col>
 
-            <Col className='text-center'>
-            <VideoActions video={video} listLayout={listLayout} />
+            <Col className="text-center">
+              <VideoActions video={video} listLayout={listLayout} />
             </Col>
           </CardBody>
-          
         </Card>
       ) : (
         <Col lg="4" md="6" sm="12">
@@ -101,15 +100,21 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
               </ModalBody>
             </Modal>
             <CardBody tag="h6" className="px-4 mt-4">
-              <div className="fav-icon-container">
-                {video.favorite && (
-                  <BsFillStarFill
-                    size={"1.5em"}
-                    className="fav-icon text-warning mb-1"
-                  />
-                )}
-              </div>
-              <CardTitle className="video-title pb-1">{title}</CardTitle>
+              <Row>
+                <Col xs='10'>
+                  <CardTitle className="video-title pb-1">{title}</CardTitle>
+                </Col>
+                <Col xs='2'>
+                  <div className="fav-icon-container">
+                    {video.favorite && (
+                      <BsFillStarFill
+                        size={"1.5em"}
+                        className="fav-icon text-warning mb-1"
+                      />
+                    )}
+                  </div>
+                </Col>
+              </Row>
               <VideoData data={video.data} />
             </CardBody>
             <CardSubtitle className="pb-4 text-center">

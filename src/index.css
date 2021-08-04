@@ -64,7 +64,16 @@ body {
 }
 
 .alert-container{
-  height: 50px;
+  position: absolute;
+  top:100%;
+  left:0;
+  right: 0;
+  margin-left: auto; 
+  margin-right: auto; 
+}
+
+.form-button{
+  min-width: 100px;
 }
 
 @media(max-width:960px){

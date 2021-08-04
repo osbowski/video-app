@@ -37,18 +37,7 @@ const AddNewVideo: React.FC = () => {
   }
 
   return (
-    <div className="text-center mt-5 mb-5" id='addForm'>
-      <h3>Add new video to list.</h3>
-      <div className='alert-container'>
-      {loading ? <Spinner size='xl' color="dark" children='' /> : ''}
-      {error ? (
-        <Alert color='danger' className='p-2'>
-          This is not ID/URL of Vimeo or  Youtube Video
-        </Alert>
-      ) : (
-        ''
-      )}
-      </div>
+    <div>
       <Form className="d-flex justify-content-center" onSubmit={onSubmit}>
         <FormGroup>
           <Input
@@ -61,10 +50,20 @@ const AddNewVideo: React.FC = () => {
             }}
           />
         </FormGroup>
-        <Button className="rounded-0" color="primary">
-          Add video
+        <Button className="rounded-0 form-button" color="primary">
+        {loading ? <Spinner size='sm' color="white" children='' /> : 'Add video'}
         </Button>
       </Form>
+      <div className='alert-container'>
+      
+      {error ? (
+        <Alert color='danger' className='p-2 text-center rounded-0'>
+          This is not ID/URL of Vimeo or  Youtube Video
+        </Alert>
+      ) : (
+        ''
+      )}
+      </div>
     </div>
   );
 };
