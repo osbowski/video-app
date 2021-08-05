@@ -31,7 +31,6 @@ const fetchVideoData = async (videoId: {
           link: `https://www.youtube.com/watch?v=${id}`,
         },
       };
-      console.log(thumbnails);
       return fetchedVideo;
     } catch (error) {
       return null;
@@ -45,6 +44,7 @@ const fetchVideoData = async (videoId: {
           Authorization: `Bearer ${process.env.REACT_APP_VIMEO_TOKEN}`,
         },
       });
+
       const fetchedData = await response.data;
       fetchedVideo = {
         id,
@@ -59,10 +59,8 @@ const fetchVideoData = async (videoId: {
           link: fetchedData.link,
         },
       };
-      console.log(fetchedData.pictures);
       return fetchedVideo;
     } catch (error) {
-      console.log("ERROR", error);
       return null;
     }
   } else {

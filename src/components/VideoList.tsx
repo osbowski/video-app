@@ -7,7 +7,9 @@ import { fetchedVideo } from "../types";
 import { Row, Button } from "reactstrap";
 import { removeAllVideos } from "../store/action-creators/removeAllVIdeos";
 
+
 const VideoList: React.FC = () => {
+
   const { videos, dispatch } = useContext(GlobalContext);
   const [pageNumber, setPageNumber] = useState(0);
   const videosPerPage = 6;
@@ -21,6 +23,7 @@ const VideoList: React.FC = () => {
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
   };
+
 
   return (
     <>
@@ -36,37 +39,31 @@ const VideoList: React.FC = () => {
       </nav>
 
       <Row>
-      {videos
-        .slice(visitedPages, visitedPages + videosPerPage)
-        .filter((video) => {
-          if (favsOnly) {
-            return video.favorite === true;
-          } else {
-            return video;
-          }
-        })
-        .map((video: fetchedVideo) =>
-          listLaoyut ? (
-            
+        {videos
+          .slice(visitedPages, visitedPages + videosPerPage)
+          .filter((video) => {
+            if (favsOnly) {
+              return video.favorite === true;
+            } else {
+              return video;
+            }
+          })
+          .map((video: fetchedVideo) =>
+            listLaoyut ? (
               <VideoListElement
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
               />
-          
-          ) : (
-            
-            
+            ) : (
               <VideoListElement
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
               />
-          )
-          
-        )}
-        </Row>
-       
+            )
+          )}
+      </Row>
 
       {videos.length > 6 ? (
         <ReactPaginate

@@ -13,7 +13,6 @@ export const checkVideoID = async (value: string) => {
       const { id, service } = data;
       return { id: id!, service };
     }else{
-      console.log('WRONG ID/URL')
       return null;
     }
   }
