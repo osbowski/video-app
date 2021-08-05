@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import { addToFavorites } from "../store/action-creators/addToFavorites";
+import { removeFromFavorites } from "../store/action-creators/removeFromFavorites";
 import { removeVideo } from "../store/action-creators/removeVideo";
 import { fetchedVideo } from "../types";
 
@@ -20,7 +21,12 @@ const VideoActions: React.FC<VideoActionsProps> = ({ video, listLayout }) => {
   };
 
   const handleFavorite = () => {
-    dispatch(addToFavorites(id));
+    if(!favorite){
+      dispatch(addToFavorites(video));
+    }else{
+      dispatch(removeFromFavorites(id))
+    }
+    
   };
 
   return (

@@ -17,21 +17,31 @@ const VideoReducer = (state: videosInterface, action: any): videosInterface => {
       };
 
     case "ADD_VIDEO_TO_FAVORITES":
-      const toFav = state.normalVideos.find(video=>video.id===action.payload);
+      const index = state.normalVideos.findIndex(
+        (video) => video.id === action.payload.id
+      );
+      const newVideosArr = [...state.normalVideos];
+      newVideosArr[index].favorite = true;
 
       return {
-        ...state,
-        normalVideos: state.normalVideos.map((video) =>
-          video.id === action.payload
-            ? { ...video, favorite: !video.favorite }
-            : video
-        ),
-        favs: [...state.favs,toFav!]
+        normalVideos: [...newVideosArr],
+        favs: [...state.favs, action.payload],
+      };
+
+    case "REMOVE_VIDEO_FROM_FAVORITE":
+      const indexToRemoveFromFav = state.normalVideos.findIndex(
+        (video) => video.id === action.payload
+      );
+      const newVideosArrRemoveFromFav = [...state.normalVideos];
+      newVideosArrRemoveFromFav[indexToRemoveFromFav].favorite = false;
+      return {
+        normalVideos: [...newVideosArrRemoveFromFav],
+        favs: state.favs.filter((video) => video!.id !== action.payload),
       };
 
     case "REMOVE_ALL_VIDEOS":
       console.log("videos removed");
-      return {normalVideos:[],favs:[]}
+      return { normalVideos: [], favs: [] };
     default:
       return state;
   }
