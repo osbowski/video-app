@@ -1,9 +1,9 @@
-import { fetchedVideo } from "../../types";
+import { videosInterface } from "../../types";
 
 export const getFromStorage = (
   key: string,
-  initialValue: fetchedVideo[] = []
-): fetchedVideo[] => {
+  initialValue: videosInterface
+): videosInterface => {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : initialValue;
 };

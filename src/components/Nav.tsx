@@ -11,8 +11,8 @@ const Nav: React.FC = () => {
           <AddNewVideo />
       <NavbarText className="text-light">
         You have
-        <span className="text-primary"> {videos.length} </span>
-        {videos.length === 1 ? "video" : "videos"} on list.
+        <span className="text-primary"> {videos.normalVideos.length} </span>
+        {videos.normalVideos.length === 1 ? "video" : "videos"} on list.
       </NavbarText>
     </Navbar>
   );

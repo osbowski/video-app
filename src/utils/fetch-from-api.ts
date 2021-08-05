@@ -31,7 +31,6 @@ const fetchVideoData = async (videoId: {
           link: `https://www.youtube.com/watch?v=${id}`,
         },
       };
-      console.log(thumbnails);
       return fetchedVideo;
     } catch (error) {
       return null;
@@ -59,7 +58,6 @@ const fetchVideoData = async (videoId: {
           link: fetchedData.link,
         },
       };
-      console.log(fetchedData.pictures);
       return fetchedVideo;
     } catch (error) {
       console.log("ERROR", error);

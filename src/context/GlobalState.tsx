@@ -19,14 +19,14 @@ export const GlobalContext = createContext<contextInterface>({
 });
 
 export const GlobalProvider: React.FC = ({ children }) => {
-  const [videos, dispatch] = useReducer(VideoReducer, {}, () => {
+  const [videos, dispatch] = useReducer(VideoReducer,initialState, () => {
     const value = getFromStorage("videos", initialState);
     return value;
   });
 
-  // useEffect(() => {
-  //   localStorage.setItem("videos", JSON.stringify(videos));
-  // }, [videos]);
+  useEffect(() => {
+    localStorage.setItem("videos", JSON.stringify(videos));
+  }, [videos]);
 
   return (
     <GlobalContext.Provider value={{ videos, dispatch }}>
@@ -34,3 +34,35 @@ export const GlobalProvider: React.FC = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
+
+
+// interface actionInterface {
+//   type: string;
+//   payload: any;
+// }
+// interface contextInterface {
+//   videos: fetchedVideo[];
+//   dispatch: Dispatch<actionInterface>;
+// }
+
+// export const GlobalContext = createContext<contextInterface>({
+//   videos: initialState,
+//   dispatch: () => {},
+// });
+
+// export const GlobalProvider: React.FC = ({ children }) => {
+//   const [videos, dispatch] = useReducer(VideoReducer, [], () => {
+//     const value = getFromStorage("videos", initialState);
+//     return value;
+//   });
+
+//   useEffect(() => {
+//     localStorage.setItem("videos", JSON.stringify(videos));
+//   }, [videos]);
+
+//   return (
+//     <GlobalContext.Provider value={{ videos, dispatch }}>
+//       {children}
+//     </GlobalContext.Provider>
+//   );
+// };
