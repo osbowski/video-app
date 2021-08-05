@@ -12,3 +12,8 @@ export interface fetchedVideo {
   favorite: boolean;
   data: videoData;
 }
+
+export interface videosInterface{
+  normalVideos:fetchedVideo[];
+  favs:fetchedVideo[];
+}

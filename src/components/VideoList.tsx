@@ -16,7 +16,7 @@ const VideoList: React.FC = () => {
   const [listLaoyut, setListLayout] = useState(false);
   const [favsOnly, setFavsOnly] = useState(false);
 
-  const pageCount = Math.ceil(videos.length / videosPerPage);
+  const pageCount = Math.ceil(videos.normalVideos.length / videosPerPage);
 
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
@@ -26,7 +26,7 @@ const VideoList: React.FC = () => {
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-end">
-        <Button onClick={() => dispatch(removeAllVideos(videos))}>
+        <Button onClick={() => dispatch(removeAllVideos(videos.normalVideos))}>
           Remove all videos
         </Button>
         <Button onClick={() => setFavsOnly(!favsOnly)}>
@@ -36,7 +36,7 @@ const VideoList: React.FC = () => {
       </nav>
 
       <Row>
-      {videos
+      {videos.normalVideos
         .slice(visitedPages, visitedPages + videosPerPage)
         .filter((video) => {
           if (favsOnly) {
@@ -68,7 +68,7 @@ const VideoList: React.FC = () => {
         </Row>
        
 
-      {videos.length > 6 ? (
+      {videos.normalVideos.length > 6 ? (
         <ReactPaginate
           previousLabel={"<<"}
           nextLabel={">>"}
