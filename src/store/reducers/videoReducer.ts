@@ -40,7 +40,6 @@ const VideoReducer = (state: videosInterface, action: any): videosInterface => {
       };
 
     case "REMOVE_ALL_VIDEOS":
-      console.log("videos removed");
       return { normalVideos: [], favs: [] };
     default:
       return state;

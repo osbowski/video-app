@@ -28,7 +28,7 @@ const VideoList: React.FC = () => {
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-end">
-        <Button onClick={() => dispatch(removeAllVideos(videos.normalVideos))}>
+        <Button onClick={() => dispatch(removeAllVideos(videos))}>
           Remove all videos
         </Button>
         <Button onClick={() => setFavsOnly(!favsOnly)}>
