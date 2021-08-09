@@ -7,6 +7,7 @@ import { fetchedVideo } from "../types";
 import { Row, Button } from "reactstrap";
 import { removeAllVideos } from "../store/action-creators/removeAllVIdeos";
 import sortVideosByDate from "../utils/sort-video-by-date";
+import { FaCaretUp, FaCaretDown  } from "react-icons/fa";
 
 const VideoList: React.FC = () => {
   const { videos, dispatch } = useContext(GlobalContext);
@@ -34,17 +35,17 @@ const VideoList: React.FC = () => {
   return (
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
-      <nav className="d-flex justify-content-end">
-      <Button onClick={() => setOldestFirst(!oldestFirst)}>
-          Set by date {oldestFirst ? '(first newest)' : '(first oldest)'}
+      <nav className="d-flex justify-content-center mb-3 w-100">
+      <Button className='rounded-0 mx-1 d-flex align-items-center' color='primary' onClick={() => setOldestFirst(!oldestFirst)}>
+          Set by date{oldestFirst ? <FaCaretUp size={20} /> : <FaCaretDown size={20}/>}
         </Button>
-        <Button onClick={() => dispatch(removeAllVideos(videos))}>
+        <Button className='rounded-0 mx-1' color='primary' onClick={() => dispatch(removeAllVideos(videos))}>
           Remove all videos
         </Button>
-        <Button onClick={() => setFavsOnly(!favsOnly)}>
+        <Button className='rounded-0 mx-1' color='primary' onClick={() => setFavsOnly(!favsOnly)}>
           {favsOnly ? "Show all videos " : "Show only favorites"}
         </Button>
-        <Button onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
+        <Button className='rounded-0 mx-1' color='primary' onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
       </nav>
 
       <Row>

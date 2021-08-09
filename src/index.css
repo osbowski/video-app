@@ -75,7 +75,10 @@ body {
 .form-button{
   min-width: 100px;
 }
-
+.btn{
+  display: flex !important;
+  align-items: center;
+}
 @media(max-width:960px){
   body{
     font-size: 0.7rem !important;
