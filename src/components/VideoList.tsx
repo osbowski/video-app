@@ -6,28 +6,38 @@ import VideoListElement from "./VideoListElement";
 import { fetchedVideo } from "../types";
 import { Row, Button } from "reactstrap";
 import { removeAllVideos } from "../store/action-creators/removeAllVIdeos";
+import sortVideosByDate from "../utils/sort-video-by-date";
 
 const VideoList: React.FC = () => {
   const { videos, dispatch } = useContext(GlobalContext);
-  const [pageNumber, setPageNumber] = useState(0);
-  const videosPerPage = 6;
-  const visitedPages = pageNumber * videosPerPage;
 
+  const [pageNumber, setPageNumber] = useState(0);
   const [listLaoyut, setListLayout] = useState(false);
   const [favsOnly, setFavsOnly] = useState(false);
+  const [oldestFirst,setOldestFirst]=useState(false)
 
+  const videosPerPage = 6;
+  const visitedPages = pageNumber * videosPerPage;
   const pageCount = Math.ceil(videos.normalVideos.length / videosPerPage);
 
   const changePage = ({ selected }: any) => {
     setPageNumber(selected);
   };
 
-  const videosToShow = favsOnly ? videos.favs : videos.normalVideos;
+  let videosToShow:fetchedVideo[];
+  videosToShow = favsOnly ? videos.favs : videos.normalVideos;
+  videosToShow=sortVideosByDate(oldestFirst,videosToShow);
+
+
+  
 
   return (
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-end">
+      <Button onClick={() => setOldestFirst(!oldestFirst)}>
+          Set by date {oldestFirst ? '(first newest)' : '(first oldest)'}
+        </Button>
         <Button onClick={() => dispatch(removeAllVideos(videos))}>
           Remove all videos
         </Button>
@@ -38,30 +48,24 @@ const VideoList: React.FC = () => {
       </nav>
 
       <Row>
-      {videosToShow
-        .slice(visitedPages, visitedPages + videosPerPage)
-        .map((video: fetchedVideo) =>
-          listLaoyut ? (
-            
+        {videosToShow
+          .slice(visitedPages, visitedPages + videosPerPage)
+          .map((video: fetchedVideo) =>
+            listLaoyut ? (
               <VideoListElement
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
               />
-          
-          ) : (
-            
-            
+            ) : (
               <VideoListElement
                 listLayout={listLaoyut}
                 key={video.id}
                 video={video}
               />
-          )
-          
-        )}
-        </Row>
-       
+            )
+          )}
+      </Row>
 
       {videosToShow.length > 6 ? (
         <ReactPaginate
