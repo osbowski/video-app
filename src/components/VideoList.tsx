@@ -22,6 +22,8 @@ const VideoList: React.FC = () => {
     setPageNumber(selected);
   };
 
+  const videosToShow = favsOnly ? videos.favs : videos.normalVideos;
+
   return (
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
@@ -36,15 +38,8 @@ const VideoList: React.FC = () => {
       </nav>
 
       <Row>
-      {videos.normalVideos
+      {videosToShow
         .slice(visitedPages, visitedPages + videosPerPage)
-        .filter((video) => {
-          if (favsOnly) {
-            return video.favorite === true;
-          } else {
-            return video;
-          }
-        })
         .map((video: fetchedVideo) =>
           listLaoyut ? (
             
@@ -68,7 +63,7 @@ const VideoList: React.FC = () => {
         </Row>
        
 
-      {videos.normalVideos.length > 6 ? (
+      {videosToShow.length > 6 ? (
         <ReactPaginate
           previousLabel={"<<"}
           nextLabel={">>"}
