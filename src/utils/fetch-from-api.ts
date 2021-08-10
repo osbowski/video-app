@@ -7,9 +7,10 @@ const fetchVideoData = async (videoId: {
 }) => {
   let fetchedVideo: fetchedVideo;
   const { id, service } = videoId;
+  let endpoint:string;
 
   if (service === "youtube") {
-    const endpoint = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.REACT_APP_YOUTUBE_API}
+    endpoint = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.REACT_APP_YOUTUBE_API}
         &fields=items(id,snippet(title, thumbnails),statistics(viewCount,likeCount))&part=snippet,statistics`;
     try {
       const response = await axios.get(endpoint);
@@ -33,10 +34,10 @@ const fetchVideoData = async (videoId: {
       };
       return fetchedVideo;
     } catch (error) {
-      return null;
+      return false;
     }
   } else if (service === "vimeo") {
-    const endpoint = `https://api.vimeo.com/videos/${id}`;
+    endpoint = `https://api.vimeo.com/videos/${id}`;
 
     try {
       const response = await axios.get(endpoint, {
@@ -60,11 +61,10 @@ const fetchVideoData = async (videoId: {
       };
       return fetchedVideo;
     } catch (error) {
-      console.log("ERROR", error);
-      return null;
+      return false;
     }
   } else {
-    return null;
+    return false;
   }
 };
 

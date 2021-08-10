@@ -1,14 +1,15 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, FormGroup, Input, Alert, Spinner } from "reactstrap";
+import { Button, Form, FormGroup, Input, Spinner } from "reactstrap";
 import fetchVideoData from "../utils/fetch-from-api";
 import { checkVideoID } from "../utils/check-video-id";
 import { GlobalContext } from "../context/GlobalState";
 import { addVideo } from "../store/action-creators/addVideoCreator";
 import { checkForDuplicateVideos } from "../utils/check-for-duplicate-videos";
+import ErrorHandler from "./ErrorHandler";
 
 const AddNewVideo: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({isError:false,errorMsg:''});
   const [loading, setLoading] = useState(false);
   const { dispatch, videos } = useContext(GlobalContext);
 
@@ -16,24 +17,31 @@ const AddNewVideo: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     const videoId = await checkVideoID(inputValue);
-    const data = videoId && videoId ? await fetchVideoData(videoId!) : null;
-
-    
+    const data = videoId && await fetchVideoData(videoId)
 
     if (data) {
       const check = checkForDuplicateVideos(data!,videos.normalVideos)
       if(check){
-        setError(true);
+        setError({
+          isError:true,
+          errorMsg:'Video alredy on the list'
+        });
         dismissAlert();
         setLoading(false)
       }else{
         dispatch(addVideo(data));
-        setError(false);
+        setError({
+          isError:false,
+          errorMsg:''
+        });
         setLoading(false);
       }
 
     } else {
-      setError(true);
+      setError({
+        isError:true,
+        errorMsg:'This is not URL/ID of Vimeo/Youtube Video'
+      });
       dismissAlert();
       setLoading(false)
     }
@@ -43,7 +51,10 @@ const AddNewVideo: React.FC = () => {
 
   const dismissAlert = ()=>{
     setTimeout(()=>{
-      setError(false);
+      setError({
+        isError:false,
+        errorMsg:''
+      });
     },5000)
   }
 
@@ -65,16 +76,7 @@ const AddNewVideo: React.FC = () => {
         {loading ? <Spinner size='sm' color="white" children='' /> : 'Add video'}
         </Button>
       </Form>
-      <div className='alert-container'>
-      
-      {error ? (
-        <Alert color='danger' className='p-2 text-center rounded-0'>
-          This is not ID/URL of Vimeo or  Youtube Video
-        </Alert>
-      ) : (
-        ''
-      )}
-      </div>
+      <ErrorHandler error={error}/>
     </div>
   );
 };
