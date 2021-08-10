@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import { useIsMount } from "../hooks/useIsMount";
 
 interface paginationInterface {
   videosperpage: number;
@@ -22,11 +23,14 @@ const VideoPagination: React.FC<paginationInterface> = ({
     pageNumbers.push(i);
   }
 
+  const isMount = useIsMount();
+
   useEffect(() => {
-    return () => {
-      console.log(pageNumbers.length-1)
+    if (isMount) {
+      console.log("First render");
+    } else {
       paginate(pageNumbers[pageNumbers.length - 1]);
-    };
+    }
   }, [totalvideos]);
 
   return (
