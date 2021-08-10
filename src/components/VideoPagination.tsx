@@ -24,6 +24,7 @@ const VideoPagination: React.FC<paginationInterface> = ({
 
   useEffect(() => {
     return () => {
+      console.log(pageNumbers.length-1)
       paginate(pageNumbers[pageNumbers.length - 1]);
     };
   }, [totalvideos]);

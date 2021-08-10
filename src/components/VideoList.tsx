@@ -27,10 +27,12 @@ const VideoList: React.FC = () => {
   const indexOfLastVideo = currentPage * videosPerPage;
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => {
+    console.log('CURRENT PAGE:',currentPage)
+    setCurrentPage(pageNumber)};
   const paginateNext = (pageNumbers: number[]) =>
     pageNumbers.length >= currentPage + 1 && setCurrentPage(currentPage + 1);
-  const paginatePrev = (pageNumbers: number[]) =>
+  const paginatePrev = () =>
     currentPage > 1 && setCurrentPage(currentPage - 1);
 
   return (
