@@ -27,10 +27,11 @@ const VideoPagination: React.FC<paginationInterface> = ({
 
   useEffect(() => {
     if (isMount) {
-      console.log("First render");
+      return;
     } else {
       paginate(pageNumbers[pageNumbers.length - 1]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalvideos]);
 
   return (

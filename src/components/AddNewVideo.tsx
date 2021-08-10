@@ -3,24 +3,35 @@ import { Button, Form, FormGroup, Input, Alert, Spinner } from "reactstrap";
 import fetchVideoData from "../utils/fetch-from-api";
 import { checkVideoID } from "../utils/check-video-id";
 import { GlobalContext } from "../context/GlobalState";
-import { addVideo } from "../store/action-creators/addVideo";
+import { addVideo } from "../store/action-creators/addVideoCreator";
+import { checkForDuplicateVideos } from "../utils/check-for-duplicate-videos";
 
 const AddNewVideo: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { dispatch } = useContext(GlobalContext);
+  const { dispatch, videos } = useContext(GlobalContext);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const videoId = await checkVideoID(inputValue);
-    const data = videoId ? await fetchVideoData(videoId!) : null;
+    const data = videoId && videoId ? await fetchVideoData(videoId!) : null;
+
+    
 
     if (data) {
-      dispatch(addVideo(data));
-      setError(false);
-      setLoading(false);
+      const check = checkForDuplicateVideos(data!,videos.normalVideos)
+      if(check){
+        setError(true);
+        dismissAlert();
+        setLoading(false)
+      }else{
+        dispatch(addVideo(data));
+        setError(false);
+        setLoading(false);
+      }
+
     } else {
       setError(true);
       dismissAlert();

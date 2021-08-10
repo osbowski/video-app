@@ -5,7 +5,7 @@ import { GlobalContext } from "../context/GlobalState";
 import VideoListElement from "./VideoListElement";
 import { fetchedVideo } from "../types";
 import { Row, Button } from "reactstrap";
-import { removeAllVideos } from "../store/action-creators/removeAllVIdeos";
+import { removeAllVideos } from "../store/action-creators/removeAllVIdeosCreator";
 import sortVideosByDate from "../utils/sort-video-by-date";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import Pagination from "./VideoPagination";
@@ -28,7 +28,6 @@ const VideoList: React.FC = () => {
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
 
   const paginate = (pageNumber: number) => {
-    console.log("CURRENT PAGE:", currentPage);
     setCurrentPage(pageNumber);
   };
   const paginateNext = (pageNumbers: number[]) =>

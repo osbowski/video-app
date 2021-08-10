@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import { addToFavorites } from "../store/action-creators/addToFavorites";
-import { removeFromFavorites } from "../store/action-creators/removeFromFavorites";
-import { removeVideo } from "../store/action-creators/removeVideo";
+import { addToFavorites } from "../store/action-creators/addToFavoritesCreator";
+import { removeFromFavorites } from "../store/action-creators/removeFromFavoritesCreator";
+import { removeVideo } from "../store/action-creators/removeVideoCreator";
 import { fetchedVideo } from "../types";
 
 import { Button, ButtonGroup } from "reactstrap";
