@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 // import ReactPaginate from "react-paginate";
 
 import { GlobalContext } from "../context/GlobalState";
@@ -7,7 +7,7 @@ import { fetchedVideo } from "../types";
 import { Row, Button } from "reactstrap";
 import { removeAllVideos } from "../store/action-creators/removeAllVIdeos";
 import sortVideosByDate from "../utils/sort-video-by-date";
-import { FaCaretUp, FaCaretDown  } from "react-icons/fa";
+import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import Pagination from "./VideoPagination";
 
 const VideoList: React.FC = () => {
@@ -15,41 +15,57 @@ const VideoList: React.FC = () => {
 
   const [listLaoyut, setListLayout] = useState(false);
   const [favsOnly, setFavsOnly] = useState(false);
-  const [oldestFirst,setOldestFirst]=useState(true)
+  const [oldestFirst, setOldestFirst] = useState(true);
 
-  const [currentPage,setCurrentPage] = useState(1);
-  const [videosPerPage]= useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [videosPerPage] = useState(3);
 
-
-
-
-  let videosToShow:fetchedVideo[];
+  let videosToShow: fetchedVideo[];
   videosToShow = favsOnly ? videos.favs : videos.normalVideos;
-  videosToShow=sortVideosByDate(oldestFirst,videosToShow)
+  videosToShow = sortVideosByDate(oldestFirst, videosToShow);
 
   const indexOfLastVideo = currentPage * videosPerPage;
   const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
 
-  const paginate = (pageNumber:number) => setCurrentPage(pageNumber);
-
-
-  
-
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginateNext = (pageNumbers: number[]) =>
+    pageNumbers.length >= currentPage + 1 && setCurrentPage(currentPage + 1);
+  const paginatePrev = (pageNumbers: number[]) =>
+    currentPage > 1 && setCurrentPage(currentPage - 1);
 
   return (
     <>
       <h1 className="text-center mb-5">Your Videos</h1>
       <nav className="d-flex justify-content-center mb-3 w-100">
-      <Button className='rounded-0 mx-1 d-flex align-items-center' color='primary' onClick={() => setOldestFirst(!oldestFirst)}>
-          Set by date{oldestFirst ? <FaCaretDown size={20}/> : <FaCaretUp size={20} />}
+        <Button
+          className="rounded-0 mx-1 d-flex align-items-center"
+          color="primary"
+          onClick={() => setOldestFirst(!oldestFirst)}
+        >
+          Set by date
+          {oldestFirst ? <FaCaretDown size={20} /> : <FaCaretUp size={20} />}
         </Button>
-        <Button className='rounded-0 mx-1' color='primary' onClick={() => dispatch(removeAllVideos(videos))}>
+        <Button
+          className="rounded-0 mx-1"
+          color="primary"
+          onClick={() => dispatch(removeAllVideos(videos))}
+        >
           Remove all videos
         </Button>
-        <Button className='rounded-0 mx-1' color='primary' onClick={() => setFavsOnly(!favsOnly)}>
+        <Button
+          className="rounded-0 mx-1"
+          color="primary"
+          onClick={() => setFavsOnly(!favsOnly)}
+        >
           {favsOnly ? "Show all videos " : "Show only favorites"}
         </Button>
-        <Button className='rounded-0 mx-1' color='primary' onClick={() => setListLayout(!listLaoyut)}>List/Grid</Button>
+        <Button
+          className="rounded-0 mx-1"
+          color="primary"
+          onClick={() => setListLayout(!listLaoyut)}
+        >
+          List/Grid
+        </Button>
       </nav>
 
       <Row>
@@ -73,38 +89,16 @@ const VideoList: React.FC = () => {
       </Row>
       <Pagination
         videosperpage={videosPerPage}
-        totalvideos = {videosToShow.length}
-        paginate = {paginate} 
+        totalvideos={videosToShow.length}
+        paginate={paginate}
+        paginateNext={paginateNext}
+        paginatePrev={paginatePrev}
       />
     </>
   );
 };
 
 export default VideoList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import ReactPaginate from "react-paginate";
 
@@ -129,8 +123,6 @@ export default VideoList;
 //   const visitedPages = pageNumber * videosPerPage;
 //   const pageCount = Math.ceil(videos.normalVideos.length / videosPerPage);
 
-
-
 //   const changePage = ({ selected }: any) => {
 //     setPageNumber(selected);
 //   };
@@ -139,11 +131,9 @@ export default VideoList;
 //   videosToShow = favsOnly ? videos.favs : videos.normalVideos;
 //   videosToShow=sortVideosByDate(oldestFirst,videosToShow);
 
-
 //   useEffect(() => {
 //     setPageNumber(pageCount)
-//   }, [videosToShow]) 
-
+//   }, [videosToShow])
 
 //   return (
 //     <>
@@ -192,7 +182,7 @@ export default VideoList;
 //           nextLinkClassName={"nextBttn"}
 //           disabledClassName={"paginationDisabled"}
 //           activeClassName={"paginationActive"}
-//           pageRangeDisplayed={6}  
+//           pageRangeDisplayed={6}
 //           marginPagesDisplayed={1}
 //         />
 //       ) : (
