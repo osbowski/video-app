@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+
+import { GlobalContext } from "../context/GlobalState";
 import { fetchedVideo } from "../types";
 import VideoActions from "./VideoActions";
 import VideoData from "./VideoData";
@@ -30,6 +32,17 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => setModal(!modal);
+
+  const { setRenderedVideos } = useContext(GlobalContext);
+
+  useEffect(() => {
+    setRenderedVideos(prevState=>prevState+1)
+    
+    return () => {
+         setRenderedVideos(prevState=>prevState-1)
+    }
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

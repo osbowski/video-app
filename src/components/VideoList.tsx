@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-// import ReactPaginate from "react-paginate";
+import { useContext, useState, useEffect } from "react";
 
 import { GlobalContext } from "../context/GlobalState";
 import VideoListElement from "./VideoListElement";
@@ -9,13 +8,14 @@ import { removeAllVideos } from "../store/action-creators/removeAllVIdeosCreator
 import sortVideosByDate from "../utils/sort-video-by-date";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import Pagination from "./VideoPagination";
+import { useIsMount } from "../hooks/useIsMount";
 
 const VideoList: React.FC = () => {
-  const { videos, dispatch } = useContext(GlobalContext);
+  const { videos, renderedVideos, dispatch } = useContext(GlobalContext);
 
   const [listLaoyut, setListLayout] = useState(false);
   const [favsOnly, setFavsOnly] = useState(false);
-  const [oldestFirst, setOldestFirst] = useState(true);
+  const [oldestFirst, setOldestFirst] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [videosPerPage] = useState(3);
@@ -33,6 +33,17 @@ const VideoList: React.FC = () => {
   const paginateNext = (pageNumbers: number[]) =>
     pageNumbers.length >= currentPage + 1 && setCurrentPage(currentPage + 1);
   const paginatePrev = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+
+  const isMount = useIsMount();
+
+  useEffect(() => {
+    if(isMount){
+      return
+    }else{
+      (renderedVideos === 0 && currentPage > 1) && setCurrentPage(currentPage - 1);
+      }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [renderedVideos])
 
   return (
     <>

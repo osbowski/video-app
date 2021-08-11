@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
-import { useIsMount } from "../hooks/useIsMount";
 
 interface paginationInterface {
   videosperpage: number;
@@ -22,18 +20,7 @@ const VideoPagination: React.FC<paginationInterface> = ({
   for (let i = 1; i <= Math.ceil(totalvideos / videosperpage); i++) {
     pageNumbers.push(i);
   }
-
-  const isMount = useIsMount();
-
-  useEffect(() => {
-    if (isMount) {
-      return;
-    } else {
-      paginate(pageNumbers[pageNumbers.length - 1]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalvideos]);
-
+  
   return (
     <Pagination className="d-flex justify-content-center">
       <PaginationLink previous onClick={() => paginatePrev(pageNumbers)} />
