@@ -5,11 +5,11 @@ import { checkVideoID } from "../utils/check-video-id";
 import { GlobalContext } from "../context/GlobalState";
 import { addVideo } from "../store/action-creators/addVideoCreator";
 import { checkForDuplicateVideos } from "../utils/check-for-duplicate-videos";
-import ErrorHandler from "./ErrorHandler";
+import AlertHandler from "./AlertHandler";
 
 const AddNewVideo: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState({isError:false,errorMsg:''});
+  const [error, setError] = useState<{isAlert:boolean, alertMsg:string, type: 'error' | 'success' | 'none'}>({isAlert:false,alertMsg:'', type:'none'});
   const [loading, setLoading] = useState(false);
   const { dispatch, videos } = useContext(GlobalContext);
 
@@ -23,24 +23,29 @@ const AddNewVideo: React.FC = () => {
       const check = checkForDuplicateVideos(data!,videos.normalVideos)
       if(check){
         setError({
-          isError:true,
-          errorMsg:'Video alredy on the list'
+          isAlert:true,
+          alertMsg:'Video alredy on the list',
+          type:'error'
         });
         dismissAlert();
         setLoading(false)
       }else{
         dispatch(addVideo(data));
         setError({
-          isError:false,
-          errorMsg:''
+          isAlert:true,
+          alertMsg:'Video added!',
+          type:'success'
         });
+        dismissAlert();
         setLoading(false);
+        
       }
 
     } else {
       setError({
-        isError:true,
-        errorMsg:'This is not URL/ID of Vimeo/Youtube Video'
+        isAlert:true,
+        alertMsg:'This is not URL/ID of Vimeo/Youtube Video',
+        type:'error'
       });
       dismissAlert();
       setLoading(false)
@@ -52,10 +57,11 @@ const AddNewVideo: React.FC = () => {
   const dismissAlert = ()=>{
     setTimeout(()=>{
       setError({
-        isError:false,
-        errorMsg:''
+        isAlert:false,
+        alertMsg:'',
+        type:'none'
       });
-    },5000)
+    },3000)
   }
 
   return (
@@ -76,7 +82,7 @@ const AddNewVideo: React.FC = () => {
         {loading ? <Spinner size='sm' color="white" children='' /> : 'Add video'}
         </Button>
       </Form>
-      <ErrorHandler error={error}/>
+      <AlertHandler alert={error}/>
     </div>
   );
 };

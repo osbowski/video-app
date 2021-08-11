@@ -18,7 +18,7 @@ const VideoList: React.FC = () => {
   const [oldestFirst, setOldestFirst] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [videosPerPage] = useState(3);
+  const [videosPerPage] = useState(6);
 
   let videosToShow: fetchedVideo[];
   videosToShow = favsOnly ? videos.favs : videos.normalVideos;
