@@ -1,6 +1,6 @@
 {
   "name": "video-app",
-  "homepage": "https://osbowski.github.io/video-app",
+  "homepage": "https://osbek-video-app.herokuapp.com/",
   "version": "0.1.0",
   "engines": {
     "node": "14.15.5"
