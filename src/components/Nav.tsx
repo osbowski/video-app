@@ -8,7 +8,7 @@ const Nav: React.FC = () => {
   return (
     <Navbar role="navigation" color="dark" fixed="top" className="px-5">
       <NavbarBrand>VideoList APP</NavbarBrand>
-          <AddNewVideo />
+      <AddNewVideo />
       <NavbarText className="text-light">
         You have
         <span className="text-primary"> {videos.normalVideos.length} </span>

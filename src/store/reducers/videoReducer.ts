@@ -7,6 +7,7 @@ const VideoReducer = (state: videosInterface, action: any): videosInterface => {
         ...state,
         normalVideos: [action.payload, ...state.normalVideos],
       };
+
     case "DELETE_VIDEO":
       return {
         ...state,

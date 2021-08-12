@@ -13,7 +13,7 @@ export interface fetchedVideo {
   data: videoData;
 }
 
-export interface videosInterface{
-  normalVideos:fetchedVideo[];
-  favs:fetchedVideo[];
+export interface videosInterface {
+  normalVideos: fetchedVideo[];
+  favs: fetchedVideo[];
 }

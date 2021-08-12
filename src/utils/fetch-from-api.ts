@@ -7,7 +7,7 @@ const fetchVideoData = async (videoId: {
 }) => {
   let fetchedVideo: fetchedVideo;
   const { id, service } = videoId;
-  let endpoint:string;
+  let endpoint: string;
 
   if (service === "youtube") {
     endpoint = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.REACT_APP_YOUTUBE_API}

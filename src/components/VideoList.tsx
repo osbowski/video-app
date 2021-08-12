@@ -9,6 +9,10 @@ import sortVideosByDate from "../utils/sort-video-by-date";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import Pagination from "./VideoPagination";
 import { useIsMount } from "../hooks/useIsMount";
+import { checkVideoID } from "../utils/check-video-id";
+import fetchVideoData from "../utils/fetch-from-api";
+import { dummyData } from "../context/dummyData";
+import { addVideo } from "../store/action-creators/addVideoCreator";
 
 const VideoList: React.FC = () => {
   const { videos, renderedVideos, dispatch } = useContext(GlobalContext);
@@ -37,13 +41,15 @@ const VideoList: React.FC = () => {
   const isMount = useIsMount();
 
   useEffect(() => {
-    if(isMount){
-      return
-    }else{
-      (renderedVideos === 0 && currentPage > 1) && setCurrentPage(currentPage - 1);
-      }
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [renderedVideos])
+    if (isMount) {
+      return;
+    } else {
+      renderedVideos === 0 &&
+        currentPage > 1 &&
+        setCurrentPage(currentPage - 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [renderedVideos]);
 
   return (
     <>
@@ -79,6 +85,21 @@ const VideoList: React.FC = () => {
           List/Grid
         </Button>
       </nav>
+      <Button
+        className="rounded-0 mx-1"
+        color="success"
+        onClick={() => {
+          if (videos.normalVideos.length === 0 && videos.favs.length === 0) {
+            dummyData.map(async (inputValue) => {
+              const videoId = await checkVideoID(inputValue);
+              const data = videoId && (await fetchVideoData(videoId));
+              data && dispatch(addVideo(data));
+            });
+          }
+        }}
+      >
+        Demo data
+      </Button>
 
       <Row>
         {videosToShow

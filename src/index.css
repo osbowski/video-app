@@ -56,41 +56,40 @@ body {
   max-height: 200px;
 }
 
-
 .fav-icon-container {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-.alert-container{
+.alert-container {
   position: absolute;
-  top:100%;
-  left:0;
+  top: 100%;
+  left: 0;
   right: 0;
-  margin-left: auto; 
-  margin-right: auto; 
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.form-button{
+.form-button {
   min-width: 100px;
 }
 
-@media(max-width:960px){
-  body{
+@media (max-width: 960px) {
+  body {
     font-size: 0.7rem !important;
   }
 
-  .btn{
-    font-size:0.7rem !important;
+  .btn {
+    font-size: 0.7rem !important;
   }
-} 
+}
 
-@media(max-width:450px){
-  .btn{
-    font-size:0.6rem !important;
+@media (max-width: 450px) {
+  .btn {
+    font-size: 0.6rem !important;
   }
-  .list-group-item{
-    font-size:0.6rem !important;
+  .list-group-item {
+    font-size: 0.6rem !important;
   }
 }

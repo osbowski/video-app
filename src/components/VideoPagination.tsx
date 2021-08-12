@@ -20,7 +20,7 @@ const VideoPagination: React.FC<paginationInterface> = ({
   for (let i = 1; i <= Math.ceil(totalvideos / videosperpage); i++) {
     pageNumbers.push(i);
   }
-  
+
   return (
     <Pagination className="d-flex justify-content-center">
       <PaginationLink previous onClick={() => paginatePrev(pageNumbers)} />

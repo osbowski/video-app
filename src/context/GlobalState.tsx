@@ -1,8 +1,14 @@
-import { createContext, useReducer, useEffect, Dispatch, useState, SetStateAction } from "react";
+import {
+  createContext,
+  useReducer,
+  useEffect,
+  Dispatch,
+  useState,
+  SetStateAction,
+} from "react";
 import { getFromStorage } from "../store/localStorage/getFromStorage";
 import VideoReducer from "../store/reducers/videoReducer";
 import { videosInterface } from "../types";
-import { initialState } from "./initialState";
 
 interface actionInterface {
   type: string;
@@ -10,23 +16,27 @@ interface actionInterface {
 }
 interface contextInterface {
   videos: videosInterface;
-  renderedVideos:number;
-  setRenderedVideos:Dispatch<SetStateAction<number>>;
+  renderedVideos: number;
+  setRenderedVideos: Dispatch<SetStateAction<number>>;
   dispatch: Dispatch<actionInterface>;
 }
 
 export const GlobalContext = createContext<contextInterface>({
-  videos: initialState,
-  renderedVideos:0,
-  setRenderedVideos:()=>{},
+  videos: { normalVideos: [], favs: [] },
+  renderedVideos: 0,
+  setRenderedVideos: () => {},
   dispatch: () => {},
 });
 
 export const GlobalProvider: React.FC = ({ children }) => {
-  const [videos, dispatch] = useReducer(VideoReducer,initialState, () => {
-    const value = getFromStorage("videos", initialState);
-    return value;
-  });
+  const [videos, dispatch] = useReducer(
+    VideoReducer,
+    { normalVideos: [], favs: [] },
+    () => {
+      const value = getFromStorage("videos", { normalVideos: [], favs: [] });
+      return value;
+    }
+  );
   const [renderedVideos, setRenderedVideos] = useState(0);
 
   useEffect(() => {
@@ -34,9 +44,10 @@ export const GlobalProvider: React.FC = ({ children }) => {
   }, [videos]);
 
   return (
-    <GlobalContext.Provider value={{ videos, renderedVideos, setRenderedVideos, dispatch }}>
+    <GlobalContext.Provider
+      value={{ videos, renderedVideos, setRenderedVideos, dispatch }}
+    >
       {children}
     </GlobalContext.Provider>
   );
 };
-

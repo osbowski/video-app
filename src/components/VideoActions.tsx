@@ -21,32 +21,22 @@ const VideoActions: React.FC<VideoActionsProps> = ({ video, listLayout }) => {
   };
 
   const handleFavorite = () => {
-    if(!favorite){
+    if (!favorite) {
       dispatch(addToFavorites(video));
-    }else{
-      dispatch(removeFromFavorites(id))
+    } else {
+      dispatch(removeFromFavorites(id));
     }
-    
   };
 
   return (
     <ButtonGroup vertical={listLayout}>
-      <Button
-        className="bg-primary rounded-0"
-        href={video.data.link}
-      >
+      <Button className="bg-primary rounded-0" href={video.data.link}>
         <FaPlay />
       </Button>
-      <Button
-        className="bg-warning rounded-0"
-        onClick={handleFavorite}
-      >
+      <Button className="bg-warning rounded-0" onClick={handleFavorite}>
         {favorite ? <FaThumbsDown /> : <FaThumbsUp />}
       </Button>
-      <Button
-        className="bg-danger rounded-0"
-        onClick={handleRemove}
-      >
+      <Button className="bg-danger rounded-0" onClick={handleRemove}>
         <FaTrashAlt />
       </Button>
     </ButtonGroup>

@@ -9,7 +9,11 @@ import AlertHandler from "./AlertHandler";
 
 const AddNewVideo: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState<{isAlert:boolean, alertMsg:string, type: 'error' | 'success' | 'none'}>({isAlert:false,alertMsg:'', type:'none'});
+  const [error, setError] = useState<{
+    isAlert: boolean;
+    alertMsg: string;
+    type: "error" | "success" | "none";
+  }>({ isAlert: false, alertMsg: "", type: "none" });
   const [loading, setLoading] = useState(false);
   const { dispatch, videos } = useContext(GlobalContext);
 
@@ -17,52 +21,50 @@ const AddNewVideo: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     const videoId = await checkVideoID(inputValue);
-    const data = videoId && await fetchVideoData(videoId)
+    const data = videoId && (await fetchVideoData(videoId));
 
     if (data) {
-      const check = checkForDuplicateVideos(data!,videos.normalVideos)
-      if(check){
+      const check = checkForDuplicateVideos(data!, videos.normalVideos);
+      if (check) {
         setError({
-          isAlert:true,
-          alertMsg:'Video alredy on the list',
-          type:'error'
-        });
-        dismissAlert();
-        setLoading(false)
-      }else{
-        dispatch(addVideo(data));
-        setError({
-          isAlert:true,
-          alertMsg:'Video added!',
-          type:'success'
+          isAlert: true,
+          alertMsg: "Video alredy on the list",
+          type: "error",
         });
         dismissAlert();
         setLoading(false);
-        
+      } else {
+        dispatch(addVideo(data));
+        setError({
+          isAlert: true,
+          alertMsg: "Video added!",
+          type: "success",
+        });
+        dismissAlert();
+        setLoading(false);
       }
-
     } else {
       setError({
-        isAlert:true,
-        alertMsg:'This is not URL/ID of Vimeo/Youtube Video',
-        type:'error'
+        isAlert: true,
+        alertMsg: "This is not URL/ID of Vimeo/Youtube Video",
+        type: "error",
       });
       dismissAlert();
-      setLoading(false)
+      setLoading(false);
     }
 
     setInputValue("");
   };
 
-  const dismissAlert = ()=>{
-    setTimeout(()=>{
+  const dismissAlert = () => {
+    setTimeout(() => {
       setError({
-        isAlert:false,
-        alertMsg:'',
-        type:'none'
+        isAlert: false,
+        alertMsg: "",
+        type: "none",
       });
-    },3000)
-  }
+    }, 3000);
+  };
 
   return (
     <div>
@@ -79,10 +81,14 @@ const AddNewVideo: React.FC = () => {
           />
         </FormGroup>
         <Button className="rounded-0 form-button" color="primary">
-        {loading ? <Spinner size='sm' color="white" children='' /> : 'Add video'}
+          {loading ? (
+            <Spinner size="sm" color="white" children="" />
+          ) : (
+            "Add video"
+          )}
         </Button>
       </Form>
-      <AlertHandler alert={error}/>
+      <AlertHandler alert={error} />
     </div>
   );
 };

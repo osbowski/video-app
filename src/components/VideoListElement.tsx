@@ -36,13 +36,13 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
   const { setRenderedVideos } = useContext(GlobalContext);
 
   useEffect(() => {
-    setRenderedVideos(prevState=>prevState+1)
-    
+    setRenderedVideos((prevState) => prevState + 1);
+
     return () => {
-         setRenderedVideos(prevState=>prevState-1)
-    }
-       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      setRenderedVideos((prevState) => prevState - 1);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -94,7 +94,7 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
           </CardBody>
         </Card>
       ) : (
-        <Col lg="4" md="6" sm="12">
+        <Col lg="4" sm="6" xs="12">
           <Card body className={`mb-3 rounded-0 bg-light`}>
             <CardImg
               className="video-thumbnail rounded-0"
@@ -114,10 +114,10 @@ const VideoListElement: React.FC<VideoListElementProps> = ({
             </Modal>
             <CardBody tag="h6" className="px-4 mt-4">
               <Row>
-                <Col xs='10'>
+                <Col xs="10">
                   <CardTitle className="video-title pb-1">{title}</CardTitle>
                 </Col>
-                <Col xs='2'>
+                <Col xs="2">
                   <div className="fav-icon-container">
                     {video.favorite && (
                       <BsFillStarFill
